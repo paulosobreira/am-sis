@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+	
+		<!--
+<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>			  		
+			<property name="hibernate.connection.datasource">java:comp/env/jdbc/MySQLDS</property>  
+-->
+
+<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.datasource">java:comp/env/jdbc/MySQLDS</property>
+
+
+		<mapping class="br.com.am.entidades.Usuario" />
+		<mapping class="br.com.am.entidades.TipoArquivamento" />
+		<mapping class="br.com.am.entidades.TipoExpurgo" />
+		<mapping class="br.com.am.entidades.Arquivamento" />
+		<mapping class="br.com.am.entidades.Empresa" />
+		<mapping class="br.com.am.entidades.Binario" />
+	</session-factory>
+</hibernate-configuration>

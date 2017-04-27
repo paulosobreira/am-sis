@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="am-sis-build">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="java-output-path" value="/am-sis/build/classes"/>
+        <property name="context-root" value="am-sis"/>
+        <property name="component.exclusion.patterns" value="WEB-INF/lib/javassist-3.20.0-GA.jar"/>
+    </wb-module>
+</project-modules>

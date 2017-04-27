@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="imageURI" id="85">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">http://www.orion.med.br/Congressoyoga/UNIFOR.jpg</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.data.oda.pojo" name="Data Source" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>SynchronizeClassPath</name>
+                    <value>true</value>
+                </ex-property>
+            </list-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.pojo.dataSet" name="Data Set" id="5">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Codigo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">Codigo</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Descricao</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">Descricao</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Observacao</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">Observacao</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DataReferenciaStr</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">DataReferenciaStr</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Logo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">Logo</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Codigo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Descricao</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Observacao</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">DataReferenciaStr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Logo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Codigo</property>
+                    <property name="nativeName">Codigo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Descricao</property>
+                    <property name="nativeName">Descricao</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Observacao</property>
+                    <property name="nativeName">Observacao</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">DataReferenciaStr</property>
+                    <property name="nativeName">DataReferenciaStr</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Logo</property>
+                    <property name="nativeName">Logo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PojoQuery appContextKey="APP_CONTEXT_KEY_DATA SET" dataSetClass="br.com.am.util.BirtDataSet" version="1.0">
+    <ColumnMapping index="1" name="Codigo" odaDataType="String">
+        <Method name="getCodigo"/>
+    </ColumnMapping>
+    <ColumnMapping index="2" name="Descricao" odaDataType="String">
+        <Method name="getDescricao"/>
+    </ColumnMapping>
+    <ColumnMapping index="3" name="Observacao" odaDataType="String">
+        <Method name="getObservacao"/>
+    </ColumnMapping>
+    <ColumnMapping index="4" name="DataReferenciaStr" odaDataType="String">
+        <Method name="getDataReferenciaStr"/>
+    </ColumnMapping>
+    <ColumnMapping index="5" name="Logo" odaDataType="String">
+        <Method name="getLogo"/>
+    </ColumnMapping>
+</PojoQuery>
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Codigo</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Codigo</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>methodNameRegx</name>
+                    <value>get*</value>
+                </ex-property>
+                <ex-property>
+                    <name>pojoClass</name>
+                    <value>br.com.am.entidades.Arquivamento</value>
+                </ex-property>
+            </list-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="53">
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Codigo</property>
+                    <text-property name="displayName">Codigo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Codigo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Descricao</property>
+                    <text-property name="displayName">Descricao</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Descricao"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Observacao</property>
+                    <text-property name="displayName">Observacao</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Observacao"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">DataReferenciaStr</property>
+                    <text-property name="displayName">DataReferenciaStr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["DataReferenciaStr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Logo</property>
+                    <text-property name="displayName">Logo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Logo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="62"/>
+            <header>
+                <row id="54">
+                    <property name="height">0.71875in</property>
+                    <cell id="55"/>
+                </row>
+            </header>
+            <detail>
+                <row id="57">
+                    <property name="height">5.927083333333333in</property>
+                    <cell id="58">
+                        <grid id="63">
+                            <property name="marginRight">0pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="height">5.697916666666667in</property>
+                            <column id="64"/>
+                            <column id="65"/>
+                            <row id="66">
+                                <property name="height">5.697916666666667in</property>
+                                <cell id="67">
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <grid id="91">
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginRight">10pt</property>
+                                        <property name="height">4.854166666666667in</property>
+                                        <column id="92"/>
+                                        <row id="93">
+                                            <property name="height">4.854166666666667in</property>
+                                            <cell id="94">
+                                                <image id="99">
+                                                    <property name="marginTop">10pt</property>
+                                                    <property name="height">1.96875in</property>
+                                                    <property name="width">5in</property>
+                                                    <property name="source">url</property>
+                                                    <expression name="uri" type="javascript">row["Logo"]</expression>
+                                                </image>
+                                                <data id="100">
+                                                    <property name="fontFamily">sans-serif</property>
+                                                    <property name="fontSize">16pt</property>
+                                                    <property name="marginTop">10pt</property>
+                                                    <property name="marginBottom">10pt</property>
+                                                    <property name="resultSetColumn">Codigo</property>
+                                                </data>
+                                                <data id="101">
+                                                    <property name="fontFamily">sans-serif</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="resultSetColumn">Descricao</property>
+                                                </data>
+                                                <data id="102">
+                                                    <property name="fontFamily">sans-serif</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="resultSetColumn">Observacao</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                    <grid id="95">
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="marginRight">10pt</property>
+                                        <property name="height">0.5833333333333334in</property>
+                                        <column id="96"/>
+                                        <row id="97">
+                                            <property name="height">0.5833333333333334in</property>
+                                            <cell id="98">
+                                                <data id="103">
+                                                    <property name="fontFamily">sans-serif</property>
+                                                    <property name="fontSize">16pt</property>
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">DataReferenciaStr</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                                <cell id="68">
+                                    <grid id="104">
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginLeft">10pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="height">4.854166666666667in</property>
+                                        <column id="105"/>
+                                        <row id="106">
+                                            <property name="height">4.854166666666667in</property>
+                                            <cell id="107">
+                                                <image id="108">
+                                                    <property name="marginTop">10pt</property>
+                                                    <property name="height">1.96875in</property>
+                                                    <property name="width">5in</property>
+                                                    <property name="source">url</property>
+                                                    <expression name="uri" type="javascript">row["Logo"]</expression>
+                                                </image>
+                                                <data id="109">
+                                                    <property name="fontFamily">sans-serif</property>
+                                                    <property name="fontSize">16pt</property>
+                                                    <property name="marginTop">10pt</property>
+                                                    <property name="marginBottom">10pt</property>
+                                                    <property name="resultSetColumn">Codigo</property>
+                                                </data>
+                                                <data id="110">
+                                                    <property name="fontFamily">sans-serif</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="resultSetColumn">Descricao</property>
+                                                </data>
+                                                <data id="111">
+                                                    <property name="fontFamily">sans-serif</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="resultSetColumn">Observacao</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                    <grid id="112">
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="marginLeft">10pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="height">0.5833333333333334in</property>
+                                        <column id="113"/>
+                                        <row id="114">
+                                            <property name="height">0.5833333333333334in</property>
+                                            <cell id="115">
+                                                <data id="116">
+                                                    <property name="fontFamily">sans-serif</property>
+                                                    <property name="fontSize">16pt</property>
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">DataReferenciaStr</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="60">
+                    <property name="height">0.14583333333333334in</property>
+                    <cell id="61"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
