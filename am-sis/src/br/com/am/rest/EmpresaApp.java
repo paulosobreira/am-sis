@@ -13,7 +13,9 @@ import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
+import br.com.am.entidades.Arquivamento;
 import br.com.am.entidades.Empresa;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
@@ -34,7 +36,16 @@ public class EmpresaApp extends RestApp {
 			if (empresa.getId() == null) {
 				session.persist(empresa);
 			} else {
-				session.update(empresa);
+				if (empresa.getArquivo() == null) {
+					Empresa empresaBase = (Empresa) session
+							.createCriteria(Empresa.class)
+							.add(Restrictions.eq("id", empresa.getId()))
+							.uniqueResult();
+					empresaBase.setNome(empresa.getNome());
+					session.update(empresaBase);
+				}else{
+					session.update(empresa);
+				}
 			}
 			session.flush();
 		} catch (Exception e) {

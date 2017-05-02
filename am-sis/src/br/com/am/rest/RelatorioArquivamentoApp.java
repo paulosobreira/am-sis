@@ -45,11 +45,13 @@ public class RelatorioArquivamentoApp extends RestApp {
 
 	private static final Map<Long, byte[]> relatorios = new HashMap<Long, byte[]>();
 
-	private Response processaValidacoes(Arquivamento arquivamento, String token) {
+	private Response processaValidacoes(Arquivamento arquivamento,
+			String token) {
 		try {
 			validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
-			return Response.status(401).entity(StringEscapeUtils.escapeHtml("Token inválido"))
+			return Response.status(401)
+					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		return null;
@@ -58,7 +60,8 @@ public class RelatorioArquivamentoApp extends RestApp {
 	@POST
 	@Path("/gerar")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response gerar(@HeaderParam("token") String token, List<Arquivamento> arquivamentos) {
+	public Response gerar(@HeaderParam("token") String token,
+			List<Arquivamento> arquivamentos) {
 		if (arquivamentos == null || arquivamentos.isEmpty()) {
 			return Response.status(400).entity("Relaório Vazio").build();
 		}
@@ -66,11 +69,14 @@ public class RelatorioArquivamentoApp extends RestApp {
 
 		String url = servletRequest.getRequestURL().toString();
 		url = url.split("rest")[0];
-		url = url + "images/logo";
-//		System.out.println("url :" + url);
-		for (Iterator iterator = arquivamentos.iterator(); iterator.hasNext();) {
+		url = url + "rest/binario/downloadImg?id=";
+		// System.out.println("url :" + url);
+		for (Iterator iterator = arquivamentos.iterator(); iterator
+				.hasNext();) {
 			Arquivamento arquivamento = (Arquivamento) iterator.next();
-			arquivamento.setLogo(url + arquivamento.getLogo() + ".png");
+			arquivamento.setLogo(
+					url + arquivamento.getEmpresa().getArquivo().getId());
+			System.out.println(arquivamento.getLogo());
 		}
 
 		String reportName = "arquivamento.rptdesign";
@@ -80,8 +86,10 @@ public class RelatorioArquivamentoApp extends RestApp {
 		try {
 			HashMap datasets = new HashMap();
 			datasets.put("APP_CONTEXT_KEY_DATA SET", arquivamentos.iterator());
-			design = birtReportEngine.openReportDesign(Recursos.class.getResourceAsStream(reportName));
-			IRunAndRenderTask task = birtReportEngine.createRunAndRenderTask(design);
+			design = birtReportEngine.openReportDesign(
+					Recursos.class.getResourceAsStream(reportName));
+			IRunAndRenderTask task = birtReportEngine
+					.createRunAndRenderTask(design);
 			task.setAppContext(datasets);
 			PDFRenderOption options = new PDFRenderOption();
 			options.setSupportedImageFormats("PNG;JPG;BMP");
@@ -124,9 +132,11 @@ public class RelatorioArquivamentoApp extends RestApp {
 	@GET
 	@Path("/imprimir/{currentTimeMillis}")
 	@Produces("application/pdf")
-	public Response imprimir(@PathParam("currentTimeMillis") Long currentTimeMillis) {
+	public Response imprimir(
+			@PathParam("currentTimeMillis") Long currentTimeMillis) {
 		try {
-			return Response.ok(relatorios.get(currentTimeMillis), "application/pdf")
+			return Response
+					.ok(relatorios.get(currentTimeMillis), "application/pdf")
 					// .header("content-disposition", "attachment; filename =
 					// doc.pdf")
 					.build();
@@ -138,7 +148,8 @@ public class RelatorioArquivamentoApp extends RestApp {
 
 	@GET
 	@Produces("application/pdf")
-	public Response getPDF(@HeaderParam("token") String token, List<Arquivamento> arquivamentos) {
+	public Response getPDF(@HeaderParam("token") String token,
+			List<Arquivamento> arquivamentos) {
 		String reportName = "arquivamento.rptdesign";
 		IReportEngine birtReportEngine = BirtEngine.getBirtEngine(context);
 		IReportRunnable design;
@@ -148,7 +159,8 @@ public class RelatorioArquivamentoApp extends RestApp {
 			// arquivamentos.iterator());
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			try {
-				List list = session.createCriteria(Arquivamento.class).addOrder(Order.asc("descricao")).list();
+				List list = session.createCriteria(Arquivamento.class)
+						.addOrder(Order.asc("descricao")).list();
 				datasets.put("APP_CONTEXT_KEY_DATA SET", list.iterator());
 
 			} finally {
@@ -158,8 +170,10 @@ public class RelatorioArquivamentoApp extends RestApp {
 			// birtReportEngine.openReportDesign(context.getRealPath("/reports")
 			// + "/" + reportName);
 
-			design = birtReportEngine.openReportDesign(Recursos.class.getResourceAsStream(reportName));
-			IRunAndRenderTask task = birtReportEngine.createRunAndRenderTask(design);
+			design = birtReportEngine.openReportDesign(
+					Recursos.class.getResourceAsStream(reportName));
+			IRunAndRenderTask task = birtReportEngine
+					.createRunAndRenderTask(design);
 			task.setAppContext(datasets);
 			PDFRenderOption options = new PDFRenderOption();
 			options.setSupportedImageFormats("PNG;JPG;BMP");
@@ -172,14 +186,16 @@ public class RelatorioArquivamentoApp extends RestApp {
 			// run report
 			task.run();
 			task.close();
-			return Response.ok(arrayOutputStream.toByteArray(), "application/pdf")
+			return Response
+					.ok(arrayOutputStream.toByteArray(), "application/pdf")
 					// .header("content-disposition",
 					// "attachment; filename = doc.pdf")
 					.build();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return Response.status(500).entity("Erro Gerando relatorio").type(MediaType.TEXT_HTML).build();
+		return Response.status(500).entity("Erro Gerando relatorio")
+				.type(MediaType.TEXT_HTML).build();
 	}
 
 }

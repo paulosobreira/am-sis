@@ -34,18 +34,17 @@
 						id="codigo" placeholder="Código">
 				</div>
 				<div class="form-group col-md-2">
-					<label>Logotipo</label> 
-					<div class="dropdown" id="logoDD">
+					<label>Empresa</label> 
+					<div class="dropdown" id="empresaDD">
 						<button class="btn btn-default dropdown-toggle" type="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<span id="logoLabel">Selecione</span> <span class="caret"></span>
+							<span id="empresaLabel">Selecione</span> <span
+								class="caret"></span>
 						</button>
-						<ul id="logoList" class="dropdown-menu"
+						<ul id="empresaList" class="dropdown-menu"
 							aria-labelledby="dropdownMenu1">
-							<li><a onclick="selecionaLogo(1)">StandShow</a></li>
-							<li><a onclick="selecionaLogo(2)">2LA</a></li> 
 						</ul>
-					</div>
+					</div>					
 				</div>
 				<div class="form-group col-md-8">
 					<label>Descrição</label> <input type="text" class="form-control"

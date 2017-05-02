@@ -93,6 +93,12 @@ public class ArquivamentoApp extends RestApp {
 							.escapeHtml("Tipo de arquivamento obrigatório."))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
+		if (arquivamento.getEmpresa() == null) {
+			return Response.status(400)
+					.entity(StringEscapeUtils
+							.escapeHtml("Empresa obrigatória."))
+					.type(MediaType.APPLICATION_JSON).build();
+		}
 		if (arquivamento.getDataReferencia() == null) {
 			return Response.status(400)
 					.entity(StringEscapeUtils

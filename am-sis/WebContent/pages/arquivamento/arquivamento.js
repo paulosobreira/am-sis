@@ -2,6 +2,10 @@ var urlServico = "/am-sis/rest/arquivamento";
 var token = localStorage.getItem("token");
 $('#alert').remove();
 
+$('#empresaDD').on('show.bs.dropdown', function() {
+	listaEmpresa();
+});
+
 $('#tipoArquivamentoDD').on('show.bs.dropdown', function() {
 	listaTiposArquivamento();
 });
@@ -43,8 +47,8 @@ function limpar() {
 	$('#tipoArquivamentoLabel').html('Selecione');
 	$('#tipoExpurgoLabel').removeData('tipoExpurgo');
 	$('#tipoExpurgoLabel').html('Selecione');
-	$('#logoLabel').removeData('logo');
-	$('#logoLabel').html('Selecione');
+	$('#empresaLabel').removeData('empresa');
+	$('#empresaLabel').html('Selecione');
 }
 
 function remover() {
@@ -77,11 +81,11 @@ function salvar() {
 					id : $('#id').val(),
 					versao : $('#versao').val(),
 					codigo : $('#codigo').val(),
-					logo : $('#logoLabel').data('logo'),
 					descricao : $('#descricao').val(),
 					observacao : $('#observacao').val(),
 					tipoArquivamento : $('#tipoArquivamentoLabel').data('tipoArquivamento'),
 					tipoExpurgo : $('#tipoExpurgoLabel').data('tipoExpurgo'),
+					empresa : $('#empresaLabel').data('empresa'),
 					dataExpurgoStr : $('#dataExpurgo').val(),
 					dataReferenciaStr : $('#dataReferencia').val()
 				}),
@@ -99,6 +103,38 @@ function salvar() {
 				}
 			});
 }
+
+function listaEmpresa() {
+	var urlServico = "/am-sis/rest/empresa";
+	$.ajax({
+		type : "GET",
+		url : urlServico,
+		headers: { 'token': token },
+		contentType : "application/json",
+		dataType : "json",
+		success : function(response) {
+			if(response.length==0){
+				$('#alert').remove();
+				var alerta = $('<div id="alert" class="alert alert-warning" role="alert">Empresa não cadastrada</div>');
+				$('#head').append(alerta);
+				return;
+			}
+			$('#empresaList').find('li').remove();
+			$.each(response, function(i, val) {
+				var li = $('<li><a>' + response[i].nome + '</a></li>');
+				li.bind("click", function() {
+					$('#empresaLabel').data('empresa' , response[i]);
+					$('#empresaLabel').html(response[i].nome);
+				});
+				$('#empresaList').append(li);
+			});
+		},
+		error : function(xhRequest, ErrorText, thrownError) {
+			tratamentoErro(xhRequest);
+		}
+	});
+}
+
 
 function listaTiposArquivamento() {
 	var urlServico = "/am-sis/rest/tipoArquivamento";
@@ -189,6 +225,8 @@ function pesquisaArquivamento(idP) {
 			$('#observacao').val(response[0].observacao);
 			$('#tipoArquivamentoLabel').data('tipoArquivamento',response[0].tipoArquivamento);
 			$('#tipoArquivamentoLabel').html(response[0].tipoArquivamento.descricao);
+			$('#empresaLabel').data('empresa',response[0].empresa);
+			$('#empresaLabel').html(response[0].empresa.nome);
 			if(response[0].tipoExpurgo){
 				$('#tipoExpurgoLabel').data('tipoExpurgo',response[0].tipoExpurgo);
 				$('#tipoExpurgoLabel').html(response[0].tipoExpurgo.descricao);
@@ -212,10 +250,12 @@ function imprimir() {
 		descricao : $('#descricao').val(),
 		observacao : $('#observacao').val(),
 		tipoArquivamento : $('#tipoArquivamentoLabel').data('tipoArquivamento'),
+		empresa : $('#empresaLabel').data('empresa'),
 		tipoExpurgo : $('#tipoExpurgoLabel').data('tipoExpurgo'),
 		dataExpurgoStr : $('#dataExpurgo').val(),
 		dataReferenciaStr : $('#dataReferencia').val()
 	});
+	debugger;
 	var urlServico = "/am-sis/rest/relatorioArquivamento";
 	$.ajax({
 			type : "POST",
