@@ -1,5 +1,6 @@
 if( (window.location.pathname.indexOf("login.jsp")==-1)
 		&& localStorage.getItem("token")==null){
+	localStorage.setItem("url", window.location);
 	window.location = "/am-sis/login.jsp";
 }
 
@@ -44,8 +45,12 @@ var loader = $('<div class="loader"></div>');
 $('body').prepend(loader);
 var $loading = loader.hide();
 $(document).ajaxStart(function() {
+	$("button").prop("disabled",true);
+	$("a").prop("disabled",true);
 	$loading.show();
 }).ajaxStop(function() {
+	$("button").prop("disabled",false);
+	$("a").prop("disabled",false);
 	$loading.hide();
 });
 

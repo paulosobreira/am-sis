@@ -25,7 +25,11 @@ function logar() {
 		success : function(response) {
 			localStorage.setItem("nome", response.nome);
 			localStorage.setItem("token", response.token);
-			window.location = "index.jsp";
+			if( localStorage.getItem("url")!=null){
+				window.location = localStorage.getItem("url");	
+			}else{
+				window.location = "index.jsp";				
+			}
 		},
 		error : function(xhRequest, ErrorText, thrownError) {
 			tratamentoErro(xhRequest);
