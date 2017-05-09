@@ -75,7 +75,7 @@ public class RelatorioArquivamentoApp extends RestApp {
 				.hasNext();) {
 			Arquivamento arquivamento = (Arquivamento) iterator.next();
 			arquivamento.setLogo(
-					url + arquivamento.getEmpresa().getArquivo().getId());
+					url + arquivamento.getEmpresa().getIdArquivo());
 			System.out.println(arquivamento.getLogo());
 		}
 

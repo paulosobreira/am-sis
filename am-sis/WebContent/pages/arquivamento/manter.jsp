@@ -34,27 +34,28 @@
 						id="codigo" placeholder="Código">
 				</div>
 				<div class="form-group col-md-2">
-					<label>Empresa</label> 
+					<label>Empresa</label>
 					<div class="dropdown" id="empresaDD">
 						<button class="btn btn-default dropdown-toggle" type="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<span id="empresaLabel">Selecione</span> <span
-								class="caret"></span>
+							<span id="empresaLabel">Selecione</span> <span class="caret"></span>
 						</button>
 						<ul id="empresaList" class="dropdown-menu"
 							aria-labelledby="dropdownMenu1">
 						</ul>
-					</div>					
+					</div>
 				</div>
 				<div class="form-group col-md-8">
 					<label>Descrição</label> <input type="text" class="form-control"
 						id="descricao" placeholder="Descrição">
 				</div>
 			</div>
-			<div class="form-group">
-				<label>Observação</label>
-				<textarea rows="5" class="form-control" id="observacao"
-					placeholder="Observação"></textarea>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label>Observação</label>
+					<textarea rows="5" class="form-control" id="observacao"
+						placeholder="Observação"></textarea>
+				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-md-4">
@@ -94,28 +95,36 @@
 						id="dataExpurgo" placeholder=">Data expurgo" required="required">
 				</div>
 			</div>
-			<button id="salvar" type="button" class="btn btn-default">
-				<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-				Salvar
-			</button>
-			<button id="limpar" type="button" class="btn btn-default">
-				<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-				Limpar
-			</button>
-			<button id="pesquisar" type="button" class="btn btn-default">
-				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-				Pesquisar
-			</button>
-			<button id="imprimir" type="button" class="btn btn-default">
-				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-				Imprimir
-			</button>
-			<button id="remover" type="button" class="btn btn-warning pull-right">
-				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-				Remover
-			</button>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<button id="salvar" type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+						Salvar
+					</button>
+					<button id="limpar" type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+						Limpar
+					</button>
+					<button id="pesquisar" type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						Pesquisar
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<button id="imprimir" type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+						Imprimir
+					</button>
+					<button id="remover" type="button"
+						class="btn btn-warning pull-right">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						Remover
+					</button>
+				</div>
+			</div>
 		</form>
-
 	</section>
 </body>
 <script src="../../js/am-sis.js"></script>

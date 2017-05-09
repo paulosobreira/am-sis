@@ -62,6 +62,7 @@ function listaEmpresas() {
 		success : function(response) {
 			$('#listaEmpresa').find('tr').remove();
 			$.each(response, function(i, val) {
+				debugger;
 				var td = $('<td/>');
 				td.append(response[i].nome);
 				var tr = $('<tr style="cursor: pointer; cursor: hand" />');
@@ -71,8 +72,8 @@ function listaEmpresas() {
 					$('#alert').remove();
 					$('#id').val(response[i].id);
 					$('#nome').val(response[i].nome);
-					if(response[i].arquivo){
-						$('#logoSalvoImg').attr('src','/am-sis/rest/binario/downloadImg?id='+response[i].arquivo.id);
+					if(response[i].idArquivo){
+						$('#logoSalvoImg').attr('src','/am-sis/rest/binario/downloadImg?id='+response[i].idArquivo);
 						$('#logoSalvo').show();
 					}else{
 						$('#logoSalvo').hide();
@@ -103,6 +104,7 @@ function salvar() {
 			processData : false,
 			type : 'POST',
 			success : function(data) {
+				debugger;
 				salvarEmpresa(data.id);
 			},
 			error : function(xhRequest, ErrorText, thrownError) {
@@ -114,13 +116,14 @@ function salvar() {
 	}
 }
 
-function salvarEmpresa(idArquivo) {
+function salvarEmpresa(idArq) {
 	var dataObj;
-	if(idArquivo){
+	debugger;
+	if(idArq){
 		dataObj = {
 				id : $('#id').val(),
 				nome : $('#nome').val(),
-				arquivo : { id : idArquivo }
+				idArquivo : idArq
 			};
 	}else{
 		dataObj = {

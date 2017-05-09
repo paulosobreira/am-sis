@@ -15,7 +15,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.am.entidades.Arquivamento;
 import br.com.am.entidades.Empresa;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
@@ -43,7 +42,7 @@ public class EmpresaApp extends RestApp {
 							.uniqueResult();
 					empresaBase.setNome(empresa.getNome());
 					session.update(empresaBase);
-				}else{
+				} else {
 					session.update(empresa);
 				}
 			}

@@ -5,7 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity(name = "am_binario")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Binario {
 
 	@Id
@@ -14,6 +18,15 @@ public class Binario {
 
 	@Lob
 	public byte[] byteArray;
+
+	public Binario() {
+		super();
+	}
+
+	public Binario(Long id) {
+		super();
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;

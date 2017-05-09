@@ -31,7 +31,8 @@ public class RestApp {
 
 	public Usuario validaToken(String token) throws UsuarioNaoAchadoExection {
 		if (token == null) {
-			return null;
+			throw new UsuarioNaoAchadoExection(
+					StringEscapeUtils.escapeHtml("Token inválido"));
 		}
 		if (token.equals(LoginApp.adminToken)) {
 			Usuario usuario = new Usuario();

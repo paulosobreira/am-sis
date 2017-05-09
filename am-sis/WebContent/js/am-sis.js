@@ -1,6 +1,7 @@
-if( (window.location.pathname.indexOf("login.jsp")==-1)
-		&& localStorage.getItem("token")==null){
-	localStorage.setItem("url", window.location);
+if( (localStorage.getItem("token")==null && 
+		window.location.href.indexOf("login.jsp")==-1)){
+	debugger;
+	localStorage.setItem("url", window.location.href);
 	window.location = "/am-sis/login.jsp";
 }
 
