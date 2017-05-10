@@ -62,9 +62,9 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
 		<dependency>
-			<groupId>org.javassist</groupId>
+			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.21.0-GA</version>
+			<version>3.12.1.GA</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>

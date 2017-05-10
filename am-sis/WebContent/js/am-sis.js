@@ -1,8 +1,7 @@
 if( (localStorage.getItem("token")==null && 
 		window.location.href.indexOf("login.jsp")==-1)){
-	debugger;
 	localStorage.setItem("url", window.location.href);
-	window.location = "/am-sis/login.jsp";
+	window.location.href = "/am-sis/login.jsp";
 }
 
 $('#sair').bind("click", function() {

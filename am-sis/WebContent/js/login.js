@@ -25,12 +25,11 @@ function logar() {
 		success : function(response) {
 			localStorage.setItem("nome", response.nome);
 			localStorage.setItem("token", response.token);
-			debugger;
 			var url = localStorage.getItem("url");
 			if( url!=null && url.indexOf("login.jsp")==-1){
-				window.location = localStorage.getItem("url");	
+				window.location.href = localStorage.getItem("url");	
 			}else{
-				window.location = "index.jsp";				
+				window.location.href = "index.jsp";				
 			}
 		},
 		error : function(xhRequest, ErrorText, thrownError) {

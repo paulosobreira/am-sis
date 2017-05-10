@@ -1,7 +1,5 @@
 package br.com.am.entidades;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,12 +22,7 @@ public class Empresa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private transient Long idArquivo;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(nullable = true)
-	@JsonIgnore
-	private Binario arquivo;
+	private Long idArquivo;
 
 	@Column(nullable = false)
 	public String nome;
@@ -56,35 +47,11 @@ public class Empresa {
 		this.nome = nome;
 	}
 
-	public Binario getArquivo() {
-		return arquivo;
-	}
-
-	public void setArquivo(Binario arquivo) {
-		this.arquivo = arquivo;
-	}
-
 	public Long getIdArquivo() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			Empresa empresa = session.load(Empresa.class, getId());
-			if (empresa.getArquivo() != null
-					&& empresa.getArquivo().getId() != null) {
-				return empresa.getArquivo().getId();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
 		return idArquivo;
 	}
 
 	public void setIdArquivo(Long idArquivo) {
-		if (getArquivo() == null) {
-			Binario binario = new Binario(idArquivo);
-			setArquivo(binario);
-		}
 		this.idArquivo = idArquivo;
 	}
 

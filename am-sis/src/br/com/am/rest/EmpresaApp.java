@@ -35,16 +35,7 @@ public class EmpresaApp extends RestApp {
 			if (empresa.getId() == null) {
 				session.persist(empresa);
 			} else {
-				if (empresa.getArquivo() == null) {
-					Empresa empresaBase = (Empresa) session
-							.createCriteria(Empresa.class)
-							.add(Restrictions.eq("id", empresa.getId()))
-							.uniqueResult();
-					empresaBase.setNome(empresa.getNome());
-					session.update(empresaBase);
-				} else {
-					session.update(empresa);
-				}
+				session.update(empresa);
 			}
 			session.flush();
 		} catch (Exception e) {
