@@ -26,7 +26,7 @@ function logar() {
 			localStorage.setItem("nome", response.nome);
 			localStorage.setItem("token", response.token);
 			var url = localStorage.getItem("url");
-			if( url!=null && url.indexOf("login.jsp")==-1){
+			if( url!=null && url.indexOf("login.jsp")==-1 && !url.endsWith('/')){
 				window.location.href = localStorage.getItem("url");	
 			}else{
 				window.location.href = "index.jsp";				
