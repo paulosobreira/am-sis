@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="../../css/am-sis.css">
 <link rel="stylesheet"
 	href="../../bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../../css/mdb-btns.css">
 <script src="../../jquery/jquery-3.1.1.min.js"></script>
 <script src="../../bootstrap/js/bootstrap.min.js"></script>
 <title>Pesquisar arquivamento</title>

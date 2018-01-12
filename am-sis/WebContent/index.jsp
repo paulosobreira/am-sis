@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/mdb-btns.css">
 <link rel="stylesheet" href="css/am-sis.css">
 <script src="jquery/jquery-3.1.1.min.js"></script>
 <title>Am-Sis</title>
