@@ -1,6 +1,5 @@
 var urlServico = "/am-sis/rest/arquivamento";
 var token = localStorage.getItem("token");
-$('#alert').remove();
 
 $('#empresaDD').on('show.bs.dropdown', function() {
 	listaEmpresa();
@@ -62,9 +61,7 @@ function remover() {
 				contentType : "application/json",
 				dataType : "json",
 				success : function(response) {
-					$('#alert').remove();
-					var sucesso = $('<div id="alert" class="alert alert-success" role="alert">Removido com sucesso</div>');
-					$('#head').append(sucesso);
+					toaster('Removido com sucesso.', 2000, 'alert alert-success');
 				},
 				error : function(xhRequest, ErrorText, thrownError) {
 					tratamentoErro(xhRequest);
@@ -92,9 +89,7 @@ function salvar() {
 				contentType : "application/json",
 				dataType : "json",
 				success : function(response) {
-					$('#alert').remove();
-					var sucesso = $('<div id="alert" class="alert alert-success" role="alert">Salvo com sucesso.</div>');
-					$('#head').append(sucesso);
+					toaster('Salvo com sucesso.', 2000, 'alert alert-success');
 					sucesso.focus();
 					limpar();
 				},
@@ -114,9 +109,7 @@ function listaEmpresa() {
 		dataType : "json",
 		success : function(response) {
 			if(response.length==0){
-				$('#alert').remove();
-				var alerta = $('<div id="alert" class="alert alert-warning" role="alert">Empresa não cadastrada</div>');
-				$('#head').append(alerta);
+				toaster('Empresa não cadastrada.', 2000, 'alert alert-warning');
 				return;
 			}
 			$('#empresaList').find('li').remove();
@@ -146,9 +139,7 @@ function listaTiposArquivamento() {
 		dataType : "json",
 		success : function(response) {
 			if(response.length==0){
-				$('#alert').remove();
-				var alerta = $('<div id="alert" class="alert alert-warning" role="alert">Tipo de arquivamento não cadastrado</div>');
-				$('#head').append(alerta);
+				toaster('Tipo de arquivamento não cadastrado.', 2000, 'alert alert-warning');
 				return;
 			}
 			$('#tipoArquivamentoList').find('li').remove();
@@ -177,9 +168,7 @@ function listaTiposExpurgo() {
 		dataType : "json",
 		success : function(response) {
 			if(response.length==0){
-				$('#alert').remove();
-				var alerta = $('<div id="alert" class="alert alert-warning" role="alert">Tipo de expurgo não cadastrado</div>');
-				$('#head').append(alerta);
+				toaster('Tipo de expurgo não cadastrado.', 2000, 'alert alert-warning');
 				return;
 			}
 			$('#tipoExpurgoList').find('li').remove();
@@ -213,9 +202,7 @@ function pesquisaArquivamento(idP) {
 		success : function(response) {
 			$('#listaArquvamentos').find('tr').remove();
 			if(response.length==0){
-				$('#alert').remove();
-				var alerta = $('<div id="alert" class="alert alert-warning" role="alert">Arquivamento não encontrado</div>');
-				$('#head').append(alerta);
+				toaster('Arquivamento não encontrado.', 2000, 'alert alert-warning');
 				return;
 			}
 			$('#id').val(response[0].id);

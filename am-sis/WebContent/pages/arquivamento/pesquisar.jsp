@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="UTF-8"%>
+<%@page import="br.com.am.recursos.Recursos"%>
 <!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../css/am-sis.css">
+<link rel="stylesheet" href="../../css/am-sis.css?v=<%=Recursos.getProperties().getProperty("versao")%>">
 <link rel="stylesheet"
 	href="../../bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../../css/mdb-btns.css">
@@ -20,7 +21,7 @@
 			<li role="presentation"><a href="../../index.jsp"> <span
 					class="glyphicon glyphicon-home" aria-hidden="true"></span> Menu
 			</a></li>
-		</ul>	
+		</ul>
 		<h3 class="text-muted">
 			Am-Sis <small>Pesquisar arquivamento</small>
 		</h3>
@@ -115,6 +116,6 @@
 		</table>
 	</section>
 </body>
-<script src="../../js/am-sis.js"></script>
-<script src="pesquisarArquivamento.js"></script>
+<script src="../../js/am-sis.js?v=<%=Recursos.getProperties().getProperty("versao")%>"></script>
+<script src="pesquisarArquivamento.js?v=<%=Recursos.getProperties().getProperty("versao")%>"></script>
 </html>

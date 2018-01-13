@@ -14,21 +14,34 @@ if (nomeUsuario) {
 	$('#nomeUsuario').html(nomeUsuario);
 }
 
+
 function tratamentoErro(xhRequest) {
-	var erro;
-	$('#alert').remove();
 	if (xhRequest.status == 401) {
-		erro = $('<div id="alert" class="alert alert-warning" role="alert">Sessão expirada <a href="../../login.jsp">Re-logar?</a></div>');
+		toaster('Sem sessão voltando ao inicio...', 2000, 'alert alert-danger');
+		setTimeout(function() {
+			localStorage.clear();
+			window.location.href = "/am-sis/login.jsp";
+		}, 3000);
 	} else {
-		erro = $('<div id="alert" class="alert alert-danger" role="alert">Erro no servidor : '
-				+ xhRequest.status + '  ' + xhRequest.responseText + '</div>');
+		console.log(xhRequest.status + '  ' + xhRequest.responseText);
+		var erroMsg = xhRequest.responseText;
+		if (xhRequest.responseJSON != null && xhRequest.responseJSON.messageString != null) {
+			erroMsg = xhRequest.responseJSON.messageString;
+		}
+		toaster(erroMsg, 3000, 'alert alert-danger');
 	}
-	erro.focus();
-	$('#head').append(erro);
-	$("html, body").animate({
-		scrollTop : 0
-	}, "slow");
 }
+
+function toaster(msg, tempo, classe) {
+	$('#snackbar').remove();
+	var toast = $('<div id="snackbar" class="show '+classe+'" role="alert">' + msg + '</div>');
+	$('#head').append(toast);
+	setTimeout(function() {
+		$('#snackbar').remove();
+	}, tempo);
+}
+
+
 
 function getParameter(val) {
 	var result = null, tmp = [];

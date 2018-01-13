@@ -2,8 +2,6 @@ var urlServico = "/am-sis/rest/usuario";
 var token = localStorage.getItem("token");
 listaUsuarios();
 
-$('#alert').remove();
-
 $('#salvar').bind("click", function() {
 	salvar();
 });
@@ -33,10 +31,8 @@ function remover() {
 		contentType : "application/json",
 		dataType : "json",
 		success : function(response) {
-			$('#alert').remove();
-			var sucesso = $('<div id="alert" class="alert alert-success" role="alert">Removido com sucesso</div>');
-			$('#head').append(sucesso);
-			listaTiposExpurgo();
+			toaster('Usuário inativado com sucesso.', 2000, 'alert alert-success');
+			listaUsuarios();
 		},
 		error : function(xhRequest, ErrorText, thrownError) {
 			tratamentoErro(xhRequest);
@@ -98,9 +94,7 @@ function salvar() {
 		contentType : "application/json",
 		dataType : "json",
 		success : function(response) {
-			$('#alert').remove();
-			var sucesso = $('<div id="alert" class="alert alert-success" role="alert">Salvo com sucesso Senha Gerada : '+response.senhaStr+'</div>');
-			$('#head').append(sucesso);
+			toaster('Salvo com sucesso Senha Gerada : '+response.senhaStr, 90000, 'alert alert-success');
 			limpar();
 			listaUsuarios();
 		},

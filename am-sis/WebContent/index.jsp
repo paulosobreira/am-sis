@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/mdb-btns.css">
-<link rel="stylesheet" href="css/am-sis.css">
+<link rel="stylesheet" href="css/am-sis.css?v=<%=Recursos.getProperties().getProperty("versao")%>">
 <script src="jquery/jquery-3.1.1.min.js"></script>
 <title>Am-Sis</title>
 </head>
@@ -60,5 +60,5 @@
 	      </div>
 	 </footer>	
 </body>
-<script src="js/am-sis.js"></script>
+<script src="js/am-sis.js?v=<%=Recursos.getProperties().getProperty("versao")%>"></script>
 </html>
