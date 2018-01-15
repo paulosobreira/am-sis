@@ -40,6 +40,14 @@ public class RestApp {
 			usuario.setToken(token);
 			return usuario;
 		}
+		if (token.startsWith("guest-")) {
+			Usuario usuario = new Usuario();
+			usuario.setNome("Visitante");
+			usuario.setToken(token);
+			usuario.setVisitante(true);
+			return usuario;
+		}
+
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			Usuario usuario = null;

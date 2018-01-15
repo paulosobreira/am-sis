@@ -1,7 +1,6 @@
 var urlServico = "/am-sis/rest/tipoArquivamento";
 var token = localStorage.getItem("token");
 listaTiposArquivamento();
-$('#alert').remove();
 
 $('#salvar').bind("click", function() {
 	salvar();
@@ -27,9 +26,7 @@ function remover() {
 		contentType : "application/json",
 		dataType : "json",
 		success : function(response) {
-			$('#alert').remove();
-			var sucesso = $('<div id="alert" class="alert alert-success" role="alert">Removido com sucesso</div>');
-			$('#head').append(sucesso);
+			toaster('Removido com sucesso.', 2000, 'alert alert-success');
 			listaTiposArquivamento();
 			limpar();
 		},
@@ -79,9 +76,7 @@ function salvar() {
 		contentType : "application/json",
 		dataType : "json",
 		success : function(response) {
-			$('#alert').remove();
-			var sucesso = $('<div id="alert" class="alert alert-success" role="alert">Salvo com sucesso</div>');
-			$('#head').append(sucesso);
+			toaster('Salvo com sucesso.', 2000, 'alert alert-success');
 			limpar();
 			listaTiposArquivamento();
 		},

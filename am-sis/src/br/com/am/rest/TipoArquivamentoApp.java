@@ -11,11 +11,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 
 import br.com.am.entidades.TipoArquivamento;
 import br.com.am.entidades.TipoExpurgo;
+import br.com.am.entidades.Usuario;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
 import br.com.am.util.Util;
@@ -52,10 +54,17 @@ public class TipoArquivamentoApp extends RestApp {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response apagarTipoArquivamento(@HeaderParam("token") String token,
 			TipoArquivamento tipoArquivamento) {
+		Usuario usuario;
 		try {
-			validaToken(token);
+			usuario = validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401).entity("Token inválido")
+					.type(MediaType.APPLICATION_JSON).build();
+		}
+		if (usuario.getVisitante()) {
+			return Response.status(403)
+					.entity(StringEscapeUtils
+							.escapeHtml("Exclusão não permitida"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -99,7 +108,8 @@ public class TipoArquivamentoApp extends RestApp {
 
 	}
 
-	private Response processaValidacoes(TipoArquivamento tipoArquivamento, String token) {
+	private Response processaValidacoes(TipoArquivamento tipoArquivamento,
+			String token) {
 		try {
 			validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {

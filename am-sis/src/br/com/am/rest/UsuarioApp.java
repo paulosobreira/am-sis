@@ -58,11 +58,18 @@ public class UsuarioApp extends RestApp {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response apagarUsuario(@HeaderParam("token") String token,
 			Usuario usuario) {
+		Usuario usuarioBase;
 		try {
-			validaToken(token);
+			usuarioBase = validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401)
 					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
+					.type(MediaType.APPLICATION_JSON).build();
+		}
+		if (usuarioBase.getVisitante()) {
+			return Response.status(403)
+					.entity(StringEscapeUtils
+							.escapeHtml("Exclusão não permitida"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		Session session = HibernateUtil.getSessionFactory().openSession();

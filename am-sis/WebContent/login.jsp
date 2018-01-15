@@ -21,6 +21,7 @@
 		</h3>
 	</section>
 	<section class="container">
+		<div class="well">Utilize Login:guest e Senha:guest para entrar como visitante</div>
 		<form>
 			<div class="form-group">
 				<label>Login</label> <input type="text" class="form-control"

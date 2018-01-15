@@ -130,6 +130,11 @@ public class ArquivamentoApp extends RestApp {
 					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
+		if(usuario.getVisitante()){
+			return Response.status(403)
+					.entity(StringEscapeUtils.escapeHtml("Exclusão não permitida"))
+					.type(MediaType.APPLICATION_JSON).build();
+		}
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			if (arquivamento.getId() == null) {

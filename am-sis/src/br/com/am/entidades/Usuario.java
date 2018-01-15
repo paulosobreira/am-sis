@@ -31,6 +31,9 @@ public class Usuario {
 	@Column(nullable = false)
 	private Boolean ativo;
 
+	@Transient
+	private Boolean visitante;
+
 	private Date acesso;
 
 	@Transient
@@ -115,6 +118,17 @@ public class Usuario {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public Boolean getVisitante() {
+		if (visitante == null) {
+			return false;
+		}
+		return visitante;
+	}
+
+	public void setVisitante(Boolean visitante) {
+		this.visitante = visitante;
 	}
 
 }

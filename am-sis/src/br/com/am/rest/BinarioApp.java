@@ -1,10 +1,15 @@
 package br.com.am.rest;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -42,6 +47,35 @@ public class BinarioApp extends RestApp {
 						.type(MediaType.APPLICATION_JSON).build();
 			}
 			byte[] byteArray = IOUtils.toByteArray(uploadedInputStream);
+
+			BufferedImage original = createImageFromBytes(byteArray);
+			if (original.getWidth() * original.getHeight() > 160000) {
+				double zoom = 0.5;
+				int largura = (int) (zoom * original.getWidth());
+				int altura = (int) (zoom * original.getHeight());
+				BufferedImage thumb = new BufferedImage(largura, altura,
+						BufferedImage.TYPE_INT_RGB);
+				Graphics2D grph = (Graphics2D) thumb.getGraphics();
+				grph.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+						RenderingHints.VALUE_ANTIALIAS_ON);
+				grph.setRenderingHint(RenderingHints.KEY_DITHERING,
+						RenderingHints.VALUE_DITHER_ENABLE);
+				grph.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+						RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+				grph.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING,
+						RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+				grph.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
+						RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+				grph.setRenderingHint(RenderingHints.KEY_RENDERING,
+						RenderingHints.VALUE_RENDER_QUALITY);
+				grph.scale(zoom, zoom);
+				grph.drawImage(original, 0, 0, null);
+				grph.dispose();
+				ByteArrayOutputStream saida = new ByteArrayOutputStream();
+				ImageIO.write(thumb, "jpg", saida);
+				byteArray = saida.toByteArray();
+			}
+
 			Binario arquivo = new Binario();
 			arquivo.setByteArray(byteArray);
 			Session session = HibernateUtil.getSessionFactory().openSession();
@@ -63,7 +97,7 @@ public class BinarioApp extends RestApp {
 
 	@GET
 	@Path("/downloadImg")
-	@Produces("image/png")
+	@Produces("image/jpg")
 	public Response downloadImg(@QueryParam("id") String id)
 			throws IOException {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -81,6 +115,15 @@ public class BinarioApp extends RestApp {
 			return tratamentoErro(e);
 		} finally {
 			session.close();
+		}
+	}
+
+	private BufferedImage createImageFromBytes(byte[] imageData) {
+		ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
+		try {
+			return ImageIO.read(bais);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }

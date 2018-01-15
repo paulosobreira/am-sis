@@ -2,7 +2,6 @@ var urlServico = "/am-sis/rest/empresa";
 var token = localStorage.getItem("token");
 listaEmpresas();
 
-$('#alert').remove();
 $('#logoSalvo').hide();
 
 $('#salvar').bind("click", function() {
@@ -38,9 +37,7 @@ function remover() {
 		contentType : "application/json",
 		dataType : "json",
 		success : function(response) {
-			$('#alert').remove();
-			var sucesso = $('<div id="alert" class="alert alert-success" role="alert">Removido com sucesso</div>');
-			$('#head').append(sucesso);
+			toaster('Removido com sucesso.', 2000, 'alert alert-success');
 			listaEmpresas();
 			limpar();
 		},
@@ -69,7 +66,6 @@ function listaEmpresas() {
 				tr.append(td);
 				$('#listaEmpresa').append(tr);
 				tr.bind("click", function() {
-					$('#alert').remove();
 					$('#id').val(response[i].id);
 					$('#nome').val(response[i].nome);
 					if(response[i].idArquivo){
@@ -141,9 +137,7 @@ function salvarEmpresa(idArq) {
 			contentType : "application/json",
 			dataType : "json",
 			success : function(response) {
-				$('#alert').remove();
-				var sucesso = $('<div id="alert" class="alert alert-success" role="alert">Salvo com sucesso</div>');
-				$('#head').append(sucesso);
+				toaster('Salvo com sucesso.', 2000, 'alert alert-success');
 				limpar();
 				listaEmpresas();
 			},

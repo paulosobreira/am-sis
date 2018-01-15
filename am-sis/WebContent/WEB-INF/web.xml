@@ -24,7 +24,6 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
-
 	<resource-env-ref>
 		<resource-env-ref-name>jdbc/MySQLDS</resource-env-ref-name>
 		<resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>

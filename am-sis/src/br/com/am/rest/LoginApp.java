@@ -36,6 +36,14 @@ public class LoginApp extends RestApp {
 				adminToken = usuario.getToken();
 				return Response.status(200).entity(usuario).build();
 			}
+			if ("guest".equals(usuario.getLogin())
+					&& "guest".equals(usuario.getSenha())) {
+				TokenGenerator tokenGenerator = new TokenGenerator();
+				usuario.setNome("Visitante");
+				usuario.setToken("guest-" + tokenGenerator.nextSessionId());
+				return Response.status(200).entity(usuario).build();
+			}
+
 		} catch (Exception e) {
 			return tratamentoErro(e);
 		}

@@ -11,11 +11,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.am.entidades.Empresa;
+import br.com.am.entidades.Usuario;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
 import br.com.am.util.Util;
@@ -51,10 +53,16 @@ public class EmpresaApp extends RestApp {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response apagarEmpresa(@HeaderParam("token") String token,
 			Empresa empreasa) {
+		Usuario usuario;
 		try {
-			validaToken(token);
+			usuario = validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401).entity("Token inválido")
+					.type(MediaType.APPLICATION_JSON).build();
+		}
+		if(usuario.getVisitante()){
+			return Response.status(403)
+					.entity(StringEscapeUtils.escapeHtml("Exclusão não permitida"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		Session session = HibernateUtil.getSessionFactory().openSession();
