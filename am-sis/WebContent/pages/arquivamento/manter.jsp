@@ -122,7 +122,7 @@
 					<button id="remover" type="button"
 						class="btn btn-warning pull-right">
 						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-						Remover
+						Apagar
 					</button>
 				</div>
 			</div>

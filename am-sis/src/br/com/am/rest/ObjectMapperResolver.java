@@ -14,7 +14,6 @@ public class ObjectMapperResolver implements ContextResolver<ObjectMapper> {
 	private final ObjectMapper mapper;
 
 	public ObjectMapperResolver() {
-		System.out.println("ObjectMapperResolver");
 		mapper = new ObjectMapper();
 	}
 

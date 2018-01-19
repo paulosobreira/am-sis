@@ -90,7 +90,6 @@ function salvar() {
 				dataType : "json",
 				success : function(response) {
 					toaster('Salvo com sucesso.', 2000, 'alert alert-success');
-					sucesso.focus();
 					limpar();
 				},
 				error : function(xhRequest, ErrorText, thrownError) {
@@ -242,7 +241,6 @@ function imprimir() {
 		dataExpurgoStr : $('#dataExpurgo').val(),
 		dataReferenciaStr : $('#dataReferencia').val()
 	});
-	debugger;
 	var urlServico = "/am-sis/rest/relatorioArquivamento";
 	$.ajax({
 			type : "POST",

@@ -59,7 +59,6 @@ function listaEmpresas() {
 		success : function(response) {
 			$('#listaEmpresa').find('tr').remove();
 			$.each(response, function(i, val) {
-				debugger;
 				var td = $('<td/>');
 				td.append(response[i].nome);
 				var tr = $('<tr style="cursor: pointer; cursor: hand" />');
@@ -100,7 +99,6 @@ function salvar() {
 			processData : false,
 			type : 'POST',
 			success : function(data) {
-				debugger;
 				salvarEmpresa(data.id);
 			},
 			error : function(xhRequest, ErrorText, thrownError) {
@@ -114,7 +112,6 @@ function salvar() {
 
 function salvarEmpresa(idArq) {
 	var dataObj;
-	debugger;
 	if(idArq){
 		dataObj = {
 				id : $('#id').val(),
