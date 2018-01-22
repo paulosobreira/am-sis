@@ -7,6 +7,7 @@
 	<name>am-sis</name>
 	<description>Arquivo Morto</description>
 	<build>
+		<finalName>am-sis</finalName> 
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
