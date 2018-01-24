@@ -21,13 +21,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.eclipse.birt.data.engine.api.DataEngine;
 import org.eclipse.birt.report.engine.api.HTMLRenderOption;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.am.entidades.Arquivamento;
 import br.com.am.erros.UsuarioNaoAchadoExection;
@@ -74,8 +77,8 @@ public class RelatorioArquivamentoApp extends RestApp {
 		for (Iterator iterator = arquivamentos.iterator(); iterator
 				.hasNext();) {
 			Arquivamento arquivamento = (Arquivamento) iterator.next();
-			arquivamento.setLogo(
-					url + arquivamento.getEmpresa().getIdArquivo());
+			arquivamento
+					.setLogo(url + arquivamento.getEmpresa().getIdArquivo());
 			System.out.println(arquivamento.getLogo());
 		}
 
@@ -146,8 +149,8 @@ public class RelatorioArquivamentoApp extends RestApp {
 		return Response.status(500).entity("Erro Imprimindo relatorio").build();
 	}
 
-	@GET
-	@Produces("application/pdf")
+//	@GET
+//	@Produces("application/pdf")
 	public Response getPDF(@HeaderParam("token") String token,
 			List<Arquivamento> arquivamentos) {
 		String reportName = "arquivamento.rptdesign";
@@ -196,6 +199,83 @@ public class RelatorioArquivamentoApp extends RestApp {
 		}
 		return Response.status(500).entity("Erro Gerando relatorio")
 				.type(MediaType.TEXT_HTML).build();
+	}
+
+	@GET
+	@Path("/gerar/{id}")
+	@Produces("text/html")
+	public Response gerarPorId(@HeaderParam("token") String token,
+			@PathParam("id") String id) {
+		if (id == null) {
+			return Response.status(400).entity("Relaório Vazio").build();
+		}
+		limpaRealtoriosAntigos();
+
+		String url = servletRequest.getRequestURL().toString();
+		url = url.split("rest")[0];
+		url = url + "rest/binario/downloadImg?id=";
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		List<Arquivamento> arquivamentos = null;
+		try {
+			Criteria criteria = session.createCriteria(Arquivamento.class);
+			criteria.add(Restrictions.eq("id", new Long(id)));
+			arquivamentos = criteria.list();
+		} finally {
+			session.close();
+		}
+		if (arquivamentos == null || arquivamentos.isEmpty()) {
+			return Response.status(400).entity("Arquivamento não encontrado")
+					.build();
+		}
+		for (Iterator iterator = arquivamentos.iterator(); iterator
+				.hasNext();) {
+			Arquivamento arquivamento = (Arquivamento) iterator.next();
+			if (arquivamento.getEmpresa().getIdArquivo() != null) {
+				arquivamento.setLogo(
+						url + arquivamento.getEmpresa().getIdArquivo());
+			}
+		}
+
+		String reportName = "arquivamento.rptdesign";
+		IReportEngine birtReportEngine;
+
+		IReportRunnable design;
+		try {
+			birtReportEngine = BirtEngine.getBirtEngine(context);
+			HashMap datasets = new HashMap();
+			datasets.put("APP_CONTEXT_KEY_DATA SET", arquivamentos.iterator());
+			design = birtReportEngine.openReportDesign(
+					Recursos.class.getResourceAsStream(reportName));
+			IRunAndRenderTask task = birtReportEngine
+					.createRunAndRenderTask(design);
+			task.setAppContext(datasets);
+			HTMLRenderOption options = new HTMLRenderOption();
+			options.setSupportedImageFormats("PNG;JPG;BMP");
+			options.setOutputFormat(HTMLRenderOption.OUTPUT_FORMAT_HTML);
+			ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+			options.setOutputStream(arrayOutputStream);
+
+			task.setRenderOption(options);
+			task.getAppContext().put(DataEngine.MEMORY_USAGE, DataEngine.MEMORY_USAGE_CONSERVATIVE);
+			task.getAppContext().put(DataEngine.MEMORY_BUFFER_SIZE, 10);
+			task.getAppContext().put(DataEngine.MEMORY_DATA_SET_CACHE, new Integer(0));
+			// HashMap parms = new HashMap();
+			// parms.put("imageURI", url);
+			// task.setParameterValues(parms);
+
+			task.run();
+			task.close();
+			return Response
+					.ok(arrayOutputStream.toByteArray(), "text/html")
+					// .header("content-disposition",
+					// "attachment; filename = doc.pdf")
+					.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			BirtEngine.destroyBirtEngine();
+		}
+		return Response.status(400).entity("Erro Gerando relatorio").build();
 	}
 
 }

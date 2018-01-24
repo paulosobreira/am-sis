@@ -93,7 +93,7 @@
 				<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 				Limpar
 			</button>
-			<button id="imprimir" type="button" class="btn btn-default">
+			<button id="imprimir" type="button" class="btn btn-default hidden">
 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
 				Imprimir
 			</button>

@@ -1,10 +1,13 @@
 package br.com.am.util;
 
+import java.util.Properties;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.internal.SessionFactoryImpl;
 
 /**
  * @author Paulo Sobreira [sowbreira@gmail.com]
@@ -27,6 +30,7 @@ public class HibernateUtil {
 
 				buildMetadata = new MetadataSources(registry).buildMetadata();
 				sessionFactory = buildMetadata.buildSessionFactory();
+				
 			} catch (Exception e) {
 				// The registry would be destroyed by the SessionFactory, but we
 				// had
@@ -41,6 +45,14 @@ public class HibernateUtil {
 	}
 
 	public static SessionFactory getSessionFactory() {
+		try {
+			SessionFactoryImpl sessionFactoryImpl = (SessionFactoryImpl) sessionFactory;
+//			Properties props = sessionFactoryImpl.getProperties();
+//			String url = props.get("hibernate.connection.datasource").toString();
+//			System.out.println("Datasource "+url);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return sessionFactory;
 	}
 

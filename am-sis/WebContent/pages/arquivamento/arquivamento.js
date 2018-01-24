@@ -220,6 +220,7 @@ function pesquisaArquivamento(idP) {
 			$('#dataReferencia').val(response[0].dataReferenciaStr)
 			$('#dataExpurgo').val(response[0].dataExpurgoStr);
 			selecionaLogo(response[0].logo);
+			$('#imprimir').removeClass('hidden');
 		},
 		error : function(xhRequest, ErrorText, thrownError) {
 			tratamentoErro(xhRequest);
@@ -228,43 +229,9 @@ function pesquisaArquivamento(idP) {
 }
 
 function imprimir() {
-	var array = new Array();
-	array.push({
-		id : $('#id').val(),
-		codigo : $('#codigo').val(),
-		logo : $('#logoLabel').data('logo'),
-		descricao : $('#descricao').val(),
-		observacao : $('#observacao').val(),
-		tipoArquivamento : $('#tipoArquivamentoLabel').data('tipoArquivamento'),
-		empresa : $('#empresaLabel').data('empresa'),
-		tipoExpurgo : $('#tipoExpurgoLabel').data('tipoExpurgo'),
-		dataExpurgoStr : $('#dataExpurgo').val(),
-		dataReferenciaStr : $('#dataReferencia').val()
-	});
-	var urlServico = "/am-sis/rest/relatorioArquivamento";
-	$.ajax({
-			type : "POST",
-			url : urlServico+"/gerar",
-			data : JSON.stringify(array),
-			contentType : "application/json",
-			dataType : "json",			
-			headers: { 'token': token },
-			success : function(response) {
-				//alert(response);
-				window.open(urlServico+"/imprimir/"+response);
-			},
-			error : function(xhRequest, ErrorText, thrownError) {
-				tratamentoErro(xhRequest);
-			}
-		});
+	window.open("/am-sis/rest/relatorioArquivamento/gerar/"+id);
 }
 
 function selecionaLogo(logo){
 	$('#logoLabel').data('logo', logo);
-	if(logo==1){
-		$('#logoLabel').html("StandShow");	
-	}
-	if(logo==2){
-		$('#logoLabel').html("2LA");	
-	}	
 }

@@ -4,12 +4,6 @@
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-
-	<!--
-       <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
-       <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-	-->
-		
 		<mapping class="br.com.am.entidades.Usuario" />
 		<mapping class="br.com.am.entidades.TipoArquivamento" />
 		<mapping class="br.com.am.entidades.TipoExpurgo" />
