@@ -229,7 +229,7 @@ function pesquisaArquivamento(idP) {
 }
 
 function imprimir() {
-	window.open("/am-sis/rest/relatorioArquivamento/gerar/"+id);
+	window.open("/am-sis/rest/relatorioArquivamento/gerarHtml/"+id);
 }
 
 function selecionaLogo(logo){

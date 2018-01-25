@@ -149,8 +149,8 @@ public class RelatorioArquivamentoApp extends RestApp {
 		return Response.status(500).entity("Erro Imprimindo relatorio").build();
 	}
 
-//	@GET
-//	@Produces("application/pdf")
+	// @GET
+	// @Produces("application/pdf")
 	public Response getPDF(@HeaderParam("token") String token,
 			List<Arquivamento> arquivamentos) {
 		String reportName = "arquivamento.rptdesign";
@@ -202,9 +202,9 @@ public class RelatorioArquivamentoApp extends RestApp {
 	}
 
 	@GET
-	@Path("/gerar/{id}")
+	@Path("/gerarHtml/{id}")
 	@Produces("text/html")
-	public Response gerarPorId(@HeaderParam("token") String token,
+	public Response gerarHtmlPorId(@HeaderParam("token") String token,
 			@PathParam("id") String id) {
 		if (id == null) {
 			return Response.status(400).entity("Relaório Vazio").build();
@@ -256,9 +256,79 @@ public class RelatorioArquivamentoApp extends RestApp {
 			options.setOutputStream(arrayOutputStream);
 
 			task.setRenderOption(options);
-			task.getAppContext().put(DataEngine.MEMORY_USAGE, DataEngine.MEMORY_USAGE_CONSERVATIVE);
-			task.getAppContext().put(DataEngine.MEMORY_BUFFER_SIZE, 10);
-			task.getAppContext().put(DataEngine.MEMORY_DATA_SET_CACHE, new Integer(0));
+			// HashMap parms = new HashMap();
+			// parms.put("imageURI", url);
+			// task.setParameterValues(parms);
+
+			task.run();
+			task.close();
+			return Response.ok(arrayOutputStream.toByteArray(), "text/html")
+					// .header("content-disposition",
+					// "attachment; filename = doc.pdf")
+					.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			BirtEngine.destroyBirtEngine();
+		}
+		return Response.status(400).entity("Erro Gerando relatorio").build();
+	}
+
+	@GET
+	@Path("/gerarPdf/{id}")
+	@Produces("application/pdf")
+	public Response gerarPDfPorId(@HeaderParam("token") String token,
+			@PathParam("id") String id) {
+		if (id == null) {
+			return Response.status(400).entity("Relaório Vazio").build();
+		}
+		limpaRealtoriosAntigos();
+
+		String url = servletRequest.getRequestURL().toString();
+		url = url.split("rest")[0];
+		url = url + "rest/binario/downloadImg?id=";
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		List<Arquivamento> arquivamentos = null;
+		try {
+			Criteria criteria = session.createCriteria(Arquivamento.class);
+			criteria.add(Restrictions.eq("id", new Long(id)));
+			arquivamentos = criteria.list();
+		} finally {
+			session.close();
+		}
+		if (arquivamentos == null || arquivamentos.isEmpty()) {
+			return Response.status(400).entity("Arquivamento não encontrado")
+					.build();
+		}
+		for (Iterator iterator = arquivamentos.iterator(); iterator
+				.hasNext();) {
+			Arquivamento arquivamento = (Arquivamento) iterator.next();
+			if (arquivamento.getEmpresa().getIdArquivo() != null) {
+				arquivamento.setLogo(
+						url + arquivamento.getEmpresa().getIdArquivo());
+			}
+		}
+
+		String reportName = "arquivamento.rptdesign";
+		IReportEngine birtReportEngine;
+
+		IReportRunnable design;
+		try {
+			birtReportEngine = BirtEngine.getBirtEngine(context);
+			HashMap datasets = new HashMap();
+			datasets.put("APP_CONTEXT_KEY_DATA SET", arquivamentos.iterator());
+			design = birtReportEngine.openReportDesign(
+					Recursos.class.getResourceAsStream(reportName));
+			IRunAndRenderTask task = birtReportEngine
+					.createRunAndRenderTask(design);
+			task.setAppContext(datasets);
+			PDFRenderOption options = new PDFRenderOption();
+			options.setSupportedImageFormats("PNG;JPG;BMP");
+			options.setOutputFormat(HTMLRenderOption.OUTPUT_FORMAT_PDF);
+			ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+			options.setOutputStream(arrayOutputStream);
+
+			task.setRenderOption(options);
 			// HashMap parms = new HashMap();
 			// parms.put("imageURI", url);
 			// task.setParameterValues(parms);
@@ -266,7 +336,7 @@ public class RelatorioArquivamentoApp extends RestApp {
 			task.run();
 			task.close();
 			return Response
-					.ok(arrayOutputStream.toByteArray(), "text/html")
+					.ok(arrayOutputStream.toByteArray(), "application/pdf")
 					// .header("content-disposition",
 					// "attachment; filename = doc.pdf")
 					.build();

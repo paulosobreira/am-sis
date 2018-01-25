@@ -8,6 +8,7 @@ import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.core.framework.IPlatformContext;
 import org.eclipse.birt.core.framework.Platform;
 import org.eclipse.birt.core.framework.PlatformServletContext;
+import org.eclipse.birt.data.engine.api.DataEngine;
 import org.eclipse.birt.report.engine.api.EngineConfig;
 import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.IReportEngine;
@@ -47,13 +48,17 @@ public class BirtEngine {
 				config.setLogConfig(birtLogDir, level);
 			}
 			config.setEngineHome("");
+			config.getAppContext().put(DataEngine.MEMORY_USAGE,
+					DataEngine.MEMORY_USAGE_CONSERVATIVE);
+			config.getAppContext().put(DataEngine.MEMORY_BUFFER_SIZE, 10);
+			config.getAppContext().put(DataEngine.MEMORY_DATA_SET_CACHE,
+					new Integer(0));
 			config.getAppContext().put(
 					EngineConstants.APPCONTEXT_CLASSLOADER_KEY,
 					BirtEngine.class.getClassLoader());
 
 			IPlatformContext context = new PlatformServletContext(sc);
 			config.setPlatformContext(context);
-
 			// Create the report engine
 			// birtEngine = new ReportEngine( config );
 			// ReportEngine engine = new ReportEngine( null );
