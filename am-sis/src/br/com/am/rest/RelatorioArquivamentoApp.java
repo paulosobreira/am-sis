@@ -210,66 +210,68 @@ public class RelatorioArquivamentoApp extends RestApp {
 			return Response.status(400).entity("Relaório Vazio").build();
 		}
 		limpaRealtoriosAntigos();
-
-		String url = servletRequest.getRequestURL().toString();
-		url = url.split("rest")[0];
-		url = url + "rest/binario/downloadImg?id=";
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List<Arquivamento> arquivamentos = null;
-		try {
-			Criteria criteria = session.createCriteria(Arquivamento.class);
-			criteria.add(Restrictions.eq("id", new Long(id)));
-			arquivamentos = criteria.list();
-		} finally {
-			session.close();
-		}
-		if (arquivamentos == null || arquivamentos.isEmpty()) {
-			return Response.status(400).entity("Arquivamento não encontrado")
-					.build();
-		}
-		for (Iterator iterator = arquivamentos.iterator(); iterator
-				.hasNext();) {
-			Arquivamento arquivamento = (Arquivamento) iterator.next();
-			if (arquivamento.getEmpresa().getIdArquivo() != null) {
-				arquivamento.setLogo(
-						url + arquivamento.getEmpresa().getIdArquivo());
+		synchronized (relatorios) {
+			String url = servletRequest.getRequestURL().toString();
+			url = url.split("rest")[0];
+			url = url + "rest/binario/downloadImg?id=";
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			List<Arquivamento> arquivamentos = null;
+			try {
+				Criteria criteria = session.createCriteria(Arquivamento.class);
+				criteria.add(Restrictions.eq("id", new Long(id)));
+				arquivamentos = criteria.list();
+			} finally {
+				session.close();
 			}
-		}
+			if (arquivamentos == null || arquivamentos.isEmpty()) {
+				return Response.status(400)
+						.entity("Arquivamento não encontrado").build();
+			}
+			for (Iterator iterator = arquivamentos.iterator(); iterator
+					.hasNext();) {
+				Arquivamento arquivamento = (Arquivamento) iterator.next();
+				if (arquivamento.getEmpresa().getIdArquivo() != null) {
+					arquivamento.setLogo(
+							url + arquivamento.getEmpresa().getIdArquivo());
+				}
+			}
 
-		String reportName = "arquivamento.rptdesign";
-		IReportEngine birtReportEngine;
+			String reportName = "arquivamento.rptdesign";
+			IReportEngine birtReportEngine;
 
-		IReportRunnable design;
-		try {
-			birtReportEngine = BirtEngine.getBirtEngine(context);
-			HashMap datasets = new HashMap();
-			datasets.put("APP_CONTEXT_KEY_DATA SET", arquivamentos.iterator());
-			design = birtReportEngine.openReportDesign(
-					Recursos.class.getResourceAsStream(reportName));
-			IRunAndRenderTask task = birtReportEngine
-					.createRunAndRenderTask(design);
-			task.setAppContext(datasets);
-			HTMLRenderOption options = new HTMLRenderOption();
-			options.setSupportedImageFormats("PNG;JPG;BMP");
-			options.setOutputFormat(HTMLRenderOption.OUTPUT_FORMAT_HTML);
-			ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-			options.setOutputStream(arrayOutputStream);
+			IReportRunnable design;
+			try {
+				birtReportEngine = BirtEngine.getBirtEngine(context);
+				HashMap datasets = new HashMap();
+				datasets.put("APP_CONTEXT_KEY_DATA SET",
+						arquivamentos.iterator());
+				design = birtReportEngine.openReportDesign(
+						Recursos.class.getResourceAsStream(reportName));
+				IRunAndRenderTask task = birtReportEngine
+						.createRunAndRenderTask(design);
+				task.setAppContext(datasets);
+				HTMLRenderOption options = new HTMLRenderOption();
+				options.setSupportedImageFormats("PNG;JPG;BMP");
+				options.setOutputFormat(HTMLRenderOption.OUTPUT_FORMAT_HTML);
+				ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+				options.setOutputStream(arrayOutputStream);
 
-			task.setRenderOption(options);
-			// HashMap parms = new HashMap();
-			// parms.put("imageURI", url);
-			// task.setParameterValues(parms);
+				task.setRenderOption(options);
+				// HashMap parms = new HashMap();
+				// parms.put("imageURI", url);
+				// task.setParameterValues(parms);
 
-			task.run();
-			task.close();
-			return Response.ok(arrayOutputStream.toByteArray(), "text/html")
-					// .header("content-disposition",
-					// "attachment; filename = doc.pdf")
-					.build();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			BirtEngine.destroyBirtEngine();
+				task.run();
+				task.close();
+				return Response.ok(arrayOutputStream.toByteArray(), "text/html")
+						// .header("content-disposition",
+						// "attachment; filename = doc.pdf")
+						.build();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				BirtEngine.destroyBirtEngine();
+			}
 		}
 		return Response.status(400).entity("Erro Gerando relatorio").build();
 	}
@@ -283,67 +285,69 @@ public class RelatorioArquivamentoApp extends RestApp {
 			return Response.status(400).entity("Relaório Vazio").build();
 		}
 		limpaRealtoriosAntigos();
-
-		String url = servletRequest.getRequestURL().toString();
-		url = url.split("rest")[0];
-		url = url + "rest/binario/downloadImg?id=";
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List<Arquivamento> arquivamentos = null;
-		try {
-			Criteria criteria = session.createCriteria(Arquivamento.class);
-			criteria.add(Restrictions.eq("id", new Long(id)));
-			arquivamentos = criteria.list();
-		} finally {
-			session.close();
-		}
-		if (arquivamentos == null || arquivamentos.isEmpty()) {
-			return Response.status(400).entity("Arquivamento não encontrado")
-					.build();
-		}
-		for (Iterator iterator = arquivamentos.iterator(); iterator
-				.hasNext();) {
-			Arquivamento arquivamento = (Arquivamento) iterator.next();
-			if (arquivamento.getEmpresa().getIdArquivo() != null) {
-				arquivamento.setLogo(
-						url + arquivamento.getEmpresa().getIdArquivo());
+		synchronized (relatorios) {
+			String url = servletRequest.getRequestURL().toString();
+			url = url.split("rest")[0];
+			url = url + "rest/binario/downloadImg?id=";
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			List<Arquivamento> arquivamentos = null;
+			try {
+				Criteria criteria = session.createCriteria(Arquivamento.class);
+				criteria.add(Restrictions.eq("id", new Long(id)));
+				arquivamentos = criteria.list();
+			} finally {
+				session.close();
 			}
-		}
+			if (arquivamentos == null || arquivamentos.isEmpty()) {
+				return Response.status(400)
+						.entity("Arquivamento não encontrado").build();
+			}
+			for (Iterator iterator = arquivamentos.iterator(); iterator
+					.hasNext();) {
+				Arquivamento arquivamento = (Arquivamento) iterator.next();
+				if (arquivamento.getEmpresa().getIdArquivo() != null) {
+					arquivamento.setLogo(
+							url + arquivamento.getEmpresa().getIdArquivo());
+				}
+			}
 
-		String reportName = "arquivamento.rptdesign";
-		IReportEngine birtReportEngine;
+			String reportName = "arquivamento.rptdesign";
+			IReportEngine birtReportEngine;
 
-		IReportRunnable design;
-		try {
-			birtReportEngine = BirtEngine.getBirtEngine(context);
-			HashMap datasets = new HashMap();
-			datasets.put("APP_CONTEXT_KEY_DATA SET", arquivamentos.iterator());
-			design = birtReportEngine.openReportDesign(
-					Recursos.class.getResourceAsStream(reportName));
-			IRunAndRenderTask task = birtReportEngine
-					.createRunAndRenderTask(design);
-			task.setAppContext(datasets);
-			PDFRenderOption options = new PDFRenderOption();
-			options.setSupportedImageFormats("PNG;JPG;BMP");
-			options.setOutputFormat(HTMLRenderOption.OUTPUT_FORMAT_PDF);
-			ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-			options.setOutputStream(arrayOutputStream);
+			IReportRunnable design;
+			try {
+				birtReportEngine = BirtEngine.getBirtEngine(context);
+				HashMap datasets = new HashMap();
+				datasets.put("APP_CONTEXT_KEY_DATA SET",
+						arquivamentos.iterator());
+				design = birtReportEngine.openReportDesign(
+						Recursos.class.getResourceAsStream(reportName));
+				IRunAndRenderTask task = birtReportEngine
+						.createRunAndRenderTask(design);
+				task.setAppContext(datasets);
+				PDFRenderOption options = new PDFRenderOption();
+				options.setSupportedImageFormats("PNG;JPG;BMP");
+				options.setOutputFormat(HTMLRenderOption.OUTPUT_FORMAT_PDF);
+				ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+				options.setOutputStream(arrayOutputStream);
 
-			task.setRenderOption(options);
-			// HashMap parms = new HashMap();
-			// parms.put("imageURI", url);
-			// task.setParameterValues(parms);
+				task.setRenderOption(options);
+				// HashMap parms = new HashMap();
+				// parms.put("imageURI", url);
+				// task.setParameterValues(parms);
 
-			task.run();
-			task.close();
-			return Response
-					.ok(arrayOutputStream.toByteArray(), "application/pdf")
-					// .header("content-disposition",
-					// "attachment; filename = doc.pdf")
-					.build();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			BirtEngine.destroyBirtEngine();
+				task.run();
+				task.close();
+				return Response
+						.ok(arrayOutputStream.toByteArray(), "application/pdf")
+						// .header("content-disposition",
+						// "attachment; filename = doc.pdf")
+						.build();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				BirtEngine.destroyBirtEngine();
+			}
 		}
 		return Response.status(400).entity("Erro Gerando relatorio").build();
 	}

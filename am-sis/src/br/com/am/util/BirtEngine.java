@@ -85,6 +85,7 @@ public class BirtEngine {
 		birtEngine.destroy();
 		Platform.shutdown();
 		birtEngine = null;
+		System.gc();
 	}
 
 	public Object clone() throws CloneNotSupportedException {
