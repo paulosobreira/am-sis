@@ -59,8 +59,10 @@ function pesquisaArquivamento() {
 				var td3 = $('<td/>');
 				td3.append(response[i].descricao);
 				var td4 = $('<td/>');
+				td4.addClass('hidden-xs');
 				td4.append(response[i].tipoArquivamento.descricao);
 				var td5 = $('<td/>');
+				td5.addClass('hidden-xs');
 				if(response[i].dataReferenciaStr){
 					td5.append(response[i].dataReferenciaStr);
 				}

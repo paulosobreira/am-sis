@@ -106,8 +106,8 @@
 				<tr>
 					<th>Código</th>
 					<th>Descrição</th>
-					<th>Tipo Arquivamento</th>
-					<th>Data Referência</th>
+					<th class="hidden-xs">Tipo Arquivamento</th>
+					<th class="hidden-xs">Data Referência</th>
 				</tr>
 			</thead>
 			<tbody id="listaArquvamentos">

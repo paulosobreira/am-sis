@@ -38,11 +38,11 @@
     border-radius: 2px;
     padding: 16px;
     position: absolute;
-    z-index: 1;
     left: 50%;
     transform : translateX(-50%);
     bottom: 30px;
     font-size: 16px;
+    z-index: 10000;
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
@@ -74,5 +74,14 @@ However, delay the fade out process for 2.5 seconds */
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+}
+
+.floatDiv{
+	position:fixed;
+	width:60px;
+	bottom:40px;
+	right:40px;
+	text-align:center;
+	z-index: 10000;
 }
 
