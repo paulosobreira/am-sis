@@ -87,15 +87,15 @@
 			</div>
 			<button id="pesquisar" type="button" class="btn btn-default">
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-				Pesquisar
+				<spam>Pesquisar</spam> 
 			</button>
 			<button id="limpar" type="button" class="btn btn-default">
 				<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-				Limpar
+				<spam>Limpar</spam> 
 			</button>
 			<button id="imprimir" type="button" class="btn btn-default hidden">
 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-				Imprimir
+				<spam>Imprimir</spam> 
 			</button>
 		</form>
 	</section>

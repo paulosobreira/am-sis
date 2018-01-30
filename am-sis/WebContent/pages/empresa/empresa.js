@@ -1,7 +1,6 @@
 var urlServico = "/am-sis/rest/empresa";
 var token = localStorage.getItem("token");
 listaEmpresas();
-btnMobile();
 
 $('#logoSalvo').hide();
 
@@ -16,24 +15,6 @@ $('#remover').bind("click", function() {
 $('#limpar').bind("click", function() {
 	limpar();
 });
-
-function btnMobile() {
-	if(window.innerWidth>window.innerHeight){
-		return;
-	}
-	$('#salvar').addClass('btn-circle');
-	$('#limpar').addClass('btn-circle');
-	$('#remover').addClass('btn-circle');
-	$('#salvar').children().slice(1).detach();
-	$('#limpar').children().slice(1).detach();
-	$('#remover').children().slice(1).detach();
-	var div = $('<div>');
-	div.addClass('floatDiv');
-	div.append($('#salvar'));
-	div.append($('#limpar'));
-	div.append($('#remover'));
-	$('body').append(div);
-}
 
 
 function limpar() {

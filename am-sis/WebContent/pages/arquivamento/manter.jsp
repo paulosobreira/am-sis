@@ -101,15 +101,15 @@
 				<div class="form-group col-md-12">
 					<button id="salvar" type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-						Salvar
+						<spam>Salvar</spam> 
 					</button>
 					<button id="limpar" type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-						Limpar
+						<spam>Limpar</spam> 
 					</button>
 					<button id="pesquisar" type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						Pesquisar
+						<spam>Pesquisar</spam> 
 					</button>
 				</div>
 			</div>
@@ -117,12 +117,12 @@
 				<div class="form-group col-md-12">
 					<button id="imprimir" type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-						Imprimir
+						<spam>Imprimir</spam> 
 					</button>
 					<button id="remover" type="button"
 						class="btn btn-warning pull-right">
 						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-						Apagar
+						<spam>Apagar</spam> 
 					</button>
 				</div>
 			</div>

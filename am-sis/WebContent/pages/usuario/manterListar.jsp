@@ -48,15 +48,15 @@
 			</div>
 			<button id="salvar" type="button" class="btn btn-default">
 				<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-				Salvar
+				<span>Salvar</span>
 			</button>
 			<button id="limpar" type="button" class="btn btn-default">
 				<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-				Limpar
+				<span>Limpar</span>
 			</button>
 			<button id="remover" type="button" class="btn btn-warning pull-right">
 				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-				Apagar
+				<span>Apagar</span>
 			</button>
 		</form>
 	</section>

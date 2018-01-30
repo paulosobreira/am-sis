@@ -1,8 +1,10 @@
-if( (localStorage.getItem("token")==null && 
-		window.location.href.indexOf("login.jsp")==-1)){
+if ((localStorage.getItem("token") == null && window.location.href
+		.indexOf("login.jsp") == -1)) {
 	localStorage.setItem("url", window.location.href);
 	window.location.href = "/am-sis/login.jsp";
 }
+
+btnMobile();
 
 $('#sair').bind("click", function() {
 	localStorage.clear();
@@ -14,6 +16,40 @@ if (nomeUsuario) {
 	$('#nomeUsuario').html(nomeUsuario);
 }
 
+function btnMobile() {
+	if (window.innerWidth > window.innerHeight) {
+		return;
+	}
+	var div = $('<div>');
+	if ($('#salvar')) {
+		$('#salvar').addClass('btn-circle');
+		$('#salvar').children().slice(1).detach();
+		div.append($('#salvar'));
+	}
+	if ($('#limpar')) {
+		$('#limpar').addClass('btn-circle');
+		$('#limpar').children().slice(1).detach();
+		div.append($('#limpar'));
+	}
+	if ($('#pesquisar')) {
+		$('#pesquisar').addClass('btn-circle');
+		$('#pesquisar').children().slice(1).detach();
+		div.append($('#pesquisar'));
+	}
+	if ($('#imprimir')) {
+		$('#imprimir').addClass('btn-circle');
+		$('#imprimir').children().slice(1).detach();
+		div.append($('#imprimir'));
+	}
+	if ($('#remover')) {
+		$('#remover').addClass('btn-circle');
+		$('#remover').children().slice(1).detach();
+		div.append($('#remover'));
+	}
+	div.addClass('floatDiv');
+
+	$('body').append(div);
+}
 
 function tratamentoErro(xhRequest) {
 	if (xhRequest.status == 401) {
@@ -25,7 +61,8 @@ function tratamentoErro(xhRequest) {
 	} else {
 		console.log(xhRequest.status + '  ' + xhRequest.responseText);
 		var erroMsg = xhRequest.responseText;
-		if (xhRequest.responseJSON != null && xhRequest.responseJSON.messageString != null) {
+		if (xhRequest.responseJSON != null
+				&& xhRequest.responseJSON.messageString != null) {
 			erroMsg = xhRequest.responseJSON.messageString;
 		}
 		toaster(erroMsg, 3000, 'alert alert-danger');
@@ -34,14 +71,13 @@ function tratamentoErro(xhRequest) {
 
 function toaster(msg, tempo, classe) {
 	$('#snackbar').remove();
-	var toast = $('<div id="snackbar" class="show '+classe+'" role="alert">' + msg + '</div>');
+	var toast = $('<div id="snackbar" class="show ' + classe
+			+ '" role="alert">' + msg + '</div>');
 	$('#head').append(toast);
 	setTimeout(function() {
 		$('#snackbar').remove();
 	}, tempo);
 }
-
-
 
 function getParameter(val) {
 	var result = null, tmp = [];
@@ -58,12 +94,12 @@ var loader = $('<div class="loader"></div>');
 $('body').prepend(loader);
 var $loading = loader.hide();
 $(document).ajaxStart(function() {
-	$("button").prop("disabled",true);
-	$("a").prop("disabled",true);
+	$("button").prop("disabled", true);
+	$("a").prop("disabled", true);
 	$loading.show();
 }).ajaxStop(function() {
-	$("button").prop("disabled",false);
-	$("a").prop("disabled",false);
+	$("button").prop("disabled", false);
+	$("a").prop("disabled", false);
 	$loading.hide();
 });
 
@@ -76,34 +112,36 @@ jQuery(window).on('error', function(e) {
 });
 
 (function($) {
-    $(".ripple-effect").click(function(e){
-        var rippler = $(this);
+	$(".ripple-effect").click(function(e) {
+		var rippler = $(this);
 
-        // create .ink element if it doesn't exist
-        if(rippler.find(".ink").length == 0) {
-            rippler.append("<span class='ink'></span>");
-        }
+		// create .ink element if it doesn't exist
+		if (rippler.find(".ink").length == 0) {
+			rippler.append("<span class='ink'></span>");
+		}
 
-        var ink = rippler.find(".ink");
+		var ink = rippler.find(".ink");
 
-        // prevent quick double clicks
-        ink.removeClass("animate");
+		// prevent quick double clicks
+		ink.removeClass("animate");
 
-        // set .ink diametr
-        if(!ink.height() && !ink.width())
-        {
-            var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
-            ink.css({height: d, width: d});
-        }
+		// set .ink diametr
+		if (!ink.height() && !ink.width()) {
+			var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
+			ink.css({
+				height : d,
+				width : d
+			});
+		}
 
-        // get click coordinates
-        var x = e.pageX - rippler.offset().left - ink.width()/2;
-        var y = e.pageY - rippler.offset().top - ink.height()/2;
+		// get click coordinates
+		var x = e.pageX - rippler.offset().left - ink.width() / 2;
+		var y = e.pageY - rippler.offset().top - ink.height() / 2;
 
-        // set .ink position and add class .animate
-        ink.css({
-          top: y+'px',
-          left:x+'px'
-        }).addClass("animate");
-    })
+		// set .ink position and add class .animate
+		ink.css({
+			top : y + 'px',
+			left : x + 'px'
+		}).addClass("animate");
+	})
 })(jQuery);

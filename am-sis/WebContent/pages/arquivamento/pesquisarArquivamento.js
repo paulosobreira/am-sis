@@ -1,5 +1,6 @@
 var token = localStorage.getItem("token");
 
+
 $('#tipoArquivamentoDD').on('show.bs.dropdown', function() {
 	listaTiposArquivamento();
 });
