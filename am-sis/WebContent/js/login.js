@@ -4,7 +4,7 @@ $('#logar').bind("click", function() {
 	logar();
 });
 
-$('#limpar').bind("click", function() {
+$('#logar-limpar').bind("click", function() {
 	limpar();
 });
 

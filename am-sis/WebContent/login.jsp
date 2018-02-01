@@ -35,7 +35,7 @@
 				<span class="glyphicon glyphicon glyphicon-log-in" aria-hidden="true"></span>
 				Login
 			</button>
-			<button id="limpar" type="reset" class="btn btn-default">
+			<button id="logar-limpar" type="reset" class="btn btn-default">
 				<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 				Limpar
 			</button>

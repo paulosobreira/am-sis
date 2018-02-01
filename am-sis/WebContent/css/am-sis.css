@@ -79,8 +79,9 @@ However, delay the fade out process for 2.5 seconds */
 .floatDiv{
 	position:fixed;
 	width:60px;
-	bottom:40px;
-	right:40px;
+	bottom:20px;
+	right:20px;
+	margin-top:10px;
 	text-align:center;
 	z-index: 10000;
 }

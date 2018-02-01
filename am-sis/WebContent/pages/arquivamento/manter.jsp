@@ -107,15 +107,11 @@
 						<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 						<spam>Limpar</spam> 
 					</button>
-					<button id="pesquisar" type="button" class="btn btn-default">
-						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						<spam>Pesquisar</spam> 
-					</button>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-md-12">
-					<button id="imprimir" type="button" class="btn btn-default">
+					<button id="imprimir" type="button" class="btn btn-default hidden">
 						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
 						<spam>Imprimir</spam> 
 					</button>
