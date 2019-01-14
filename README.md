@@ -22,7 +22,7 @@ Dockerhub:
 Pode ser executado no [Play with Docker](https://labs.play-with-docker.com/)
 
 
-```Docker
+```
 docker run --name mysql -d sowbreira/mysql
 docker run --name tomcat -d -p 8080:8080 --link mysql:db  sowbreira/am-sis
 ```
