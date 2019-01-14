@@ -5,10 +5,11 @@ Exemplo de implementação basica de um sistema para arquivo morto.
 Lista de tecnologias usadas:
 1. Java
 2. JS
-3. Hibernate
-4. REST
-5. MySql
-6. Maven
+3. Bootstrap
+4. Hibernate
+5. REST
+6. MySql
+7. Maven
    
 ## Como testar
 
