@@ -1,7 +1,6 @@
-# am-sis
-Sistema de gestão de caixas de arquivo morto
+# am-sis 
 
-Implementação basica de um sistema para aquivuivo morto.
+Exemplo de implementação basica de um sistema para arquivo morto.
 
 Lista de tecnologias usadas:
 1. Java
@@ -11,7 +10,7 @@ Lista de tecnologias usadas:
 5. MySql
 6. Maven
    
-## Imagens
+## Como testar
 
 Dockerhub:
 
