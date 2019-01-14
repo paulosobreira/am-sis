@@ -13,16 +13,21 @@ Lista de tecnologias usadas:
    
 ## Como testar
 
-Dockerhub:
+>No repositório Dockerhub:
 
 1.[sowbreira/am-sis](https://cloud.docker.com/u/sowbreira/repository/docker/sowbreira/am-sis)
 
 2.[sowbreira/mysql](https://cloud.docker.com/u/sowbreira/repository/docker/sowbreira/mysql)
 
-Pode ser executado no [Play with Docker](https://labs.play-with-docker.com/)
+>Pode ser executado no [Play with Docker](https://labs.play-with-docker.com/)
 
 
-```
+```Docker
 docker run --name mysql -d sowbreira/mysql
 docker run --name tomcat -d -p 8080:8080 --link mysql:db  sowbreira/am-sis
 ```
+
+>Url de acesso:
+
+link_gerado_playwithdocker/**am-sis/login.jsp**
+
