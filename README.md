@@ -21,7 +21,6 @@ Lista de tecnologias usadas:
 
 >Pode ser executado no [Play with Docker](https://labs.play-with-docker.com/)
 
-
 ```Docker
 docker run --name mysql -d sowbreira/mysql
 docker run --name tomcat -d -p 8080:8080 --link mysql:db  sowbreira/am-sis
@@ -36,3 +35,4 @@ Subir os containers com docker-compose up
 
 link_gerado_playwithdocker/**am-sis/login.jsp**
 
+>Login : Admin Senha : am-sis
