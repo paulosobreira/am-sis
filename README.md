@@ -30,7 +30,7 @@ Pode ser executado no [Play with Docker](https://labs.play-with-docker.com/)
 
 >Baixar o aqruivo do docker compose
 ```
-curl -LfO 'https://raw.githubusercontent.com/paulosobreira/am-sis/master/docker-compose.yaml'
+curl -LfO 'https://raw.githubusercontent.com/paulosobreira/am-sis/master/docker-compose.yml'
 ```
 
 >Iniciar containers do Mysql,PhpMyAdmin e Am-sis
