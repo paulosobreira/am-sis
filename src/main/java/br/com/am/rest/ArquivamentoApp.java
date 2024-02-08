@@ -102,7 +102,7 @@ public class ArquivamentoApp extends RestApp {
 						&& arquivamento.getDataExpurgo() == null)) {
 			return Response.status(400)
 					.entity(StringEscapeUtils
-							.escapeHtml("Tipo de expurgo inválido."))
+							.escapeHtml("Data de expurgo obrigatória."))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		return null;

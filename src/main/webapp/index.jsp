@@ -29,9 +29,6 @@
 			</h3>
 		</div>
 		<div class="list-group">
-			<a href="pages/empresa/manterListar.jsp" class="list-group-item">
-				<button type="button" class="btn btn-default btn-block">Empresa</button>
-			</a>
 			<a href="pages/arquivamento/manter.jsp" class="list-group-item">
 				<button type="button" class="btn btn-default btn-block">Cadastra
 					Arquivamento</button>
@@ -39,6 +36,9 @@
 			<a href="pages/arquivamento/pesquisar.jsp" class="list-group-item">
 				<button type="button" class="btn btn-default btn-block">Pesquisar
 					Arquivamento</button>
+			</a>
+			<a href="pages/empresa/manterListar.jsp" class="list-group-item">
+				<button type="button" class="btn btn-default btn-block">Empresa</button>
 			</a>
 			<a href="pages/tipoArquivamento/manterListar.jsp"
 				class="list-group-item">

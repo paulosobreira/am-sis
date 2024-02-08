@@ -17,18 +17,25 @@ Lista de tecnologias usadas:
 
 1.[sowbreira/am-sis](https://cloud.docker.com/u/sowbreira/repository/docker/sowbreira/am-sis)
 
-2.[sowbreira/mysql](https://cloud.docker.com/u/sowbreira/repository/docker/sowbreira/mysql)
+## Construção Maven e Docker
 
->Pode ser executado no [Play with Docker](https://labs.play-with-docker.com/)
+- mvn clean package
+- mvn war:war
+- docker build -f am-sis.dockerfile . -t sowbreira/am-sis
+- docker push sowbreira/am-sis
 
-```Docker
-docker run --name mysql -d sowbreira/mysql
-docker run --name tomcat -d -p 8080:8080 --link mysql:db  sowbreira/am-sis
+## Como testar no Play with Docker
+
+Pode ser executado no [Play with Docker](https://labs.play-with-docker.com/)
+
+>Baixar o aqruivo do docker compose
 ```
-ou 
-```Docker-Compose
-Utilizar o vi para criar o docker-compose.yml
-Subir os containers com docker-compose up
+curl -LfO 'https://raw.githubusercontent.com/paulosobreira/am-sis/master/docker-compose.yaml'
+```
+
+>Iniciar containers do Mysql,PhpMyAdmin e Am-sis
+```
+docker compose up
 ```
 
 >Url de acesso:

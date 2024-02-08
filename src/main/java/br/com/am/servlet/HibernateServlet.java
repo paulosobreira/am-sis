@@ -1,7 +1,13 @@
 package br.com.am.servlet;
 
+import br.com.am.entidades.Empresa;
+import br.com.am.entidades.TipoArquivamento;
+import br.com.am.entidades.TipoExpurgo;
+import br.com.am.util.HibernateUtil;
 import br.com.am.util.Util;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
@@ -54,6 +60,19 @@ public class HibernateServlet extends HttpServlet {
                     try {
                         Thread.sleep(10000);
                         createSchema(null);
+                        Session session = HibernateUtil.getSession();
+                        Transaction transaction = session.beginTransaction();
+                        Empresa empresa = new Empresa();
+                        empresa.setNome("Am-Sis");
+                        session.persist(empresa);
+                        TipoArquivamento tipoArquivamento = new TipoArquivamento();
+                        tipoArquivamento.setDescricao("Remessas");
+                        session.persist(tipoArquivamento);
+                        TipoExpurgo tipoExpurgo = new TipoExpurgo();
+                        tipoExpurgo.setDescricao("Lixo");
+                        session.persist(tipoExpurgo);
+                        transaction.commit();
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
