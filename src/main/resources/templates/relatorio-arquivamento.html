@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Relatório de Arquivamento</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: sans-serif; background: #fff; }
+
+        .pagina {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 1cm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            page-break-after: always;
+        }
+        .pagina:last-child { page-break-after: avoid; }
+
+        .linha-colunas {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .coluna {
+            flex: 1;
+        }
+
+        .caixa-principal {
+            border: 2px solid #000;
+            padding: 15px;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo {
+            max-height: 140px;
+            max-width: 100%;
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
+
+        .logo-placeholder {
+            height: 140px;
+            margin-bottom: 15px;
+        }
+
+        .codigo {
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 10px 0 8px;
+            word-break: break-word;
+        }
+
+        .descricao {
+            font-size: 12pt;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .observacao {
+            font-size: 11pt;
+            color: #333;
+            word-break: break-word;
+        }
+
+        .caixa-data {
+            border: 2px solid #000;
+            border-top: none;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .data-ref {
+            font-size: 18pt;
+            font-weight: bold;
+        }
+
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .pagina { page-break-after: always; }
+            .pagina:last-child { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div th:each="arq : ${arquivamentos}" class="pagina">
+        <div class="linha-colunas">
+
+            <div class="coluna" th:each="i : ${#numbers.sequence(1, 2)}">
+                <div class="caixa-principal">
+                    <img th:if="${arq.logo != null and !arq.logo.isEmpty()}"
+                         th:src="${arq.logo}"
+                         class="logo"
+                         alt="Logo da empresa"/>
+                    <div th:unless="${arq.logo != null and !arq.logo.isEmpty()}"
+                         class="logo-placeholder"></div>
+                    <div class="codigo" th:text="${arq.codigo}"></div>
+                    <div class="descricao" th:text="${arq.descricao}"></div>
+                    <div class="observacao" th:if="${arq.observacao != null}"
+                         th:text="${arq.observacao}"></div>
+                </div>
+                <div class="caixa-data">
+                    <span class="data-ref" th:text="${arq.dataReferenciaStr}"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

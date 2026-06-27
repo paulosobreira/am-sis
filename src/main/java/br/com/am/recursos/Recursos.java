@@ -12,12 +12,14 @@ public class Recursos {
 
     public static void initProperties() {
         try {
-            Recursos recursos = new Recursos();
+            java.io.InputStream stream = Recursos.class.getResourceAsStream("/config.properties");
+            if (stream == null) {
+                throw new IllegalStateException("config.properties nao encontrado no classpath");
+            }
             properties = new Properties();
-            properties.load(recursos.getClass().getResourceAsStream("/config.properties"));
-            System.out.println("br.com.am.recursos.Recursos.getProperties()");
-            System.out.println(br.com.am.recursos.Recursos.getProperties());
-        } catch (IOException e) {
+            properties.load(stream);
+            stream.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

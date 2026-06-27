@@ -9,6 +9,15 @@ dependency-reduced-pom.xml
 .idea
 *.iml
 
+# Logs
+logs/
+
+# Banco H2 local
+data/
+
+# Tomcat work dir gerado em runtime
+tomcat.*/
+
 # Ferramentas de desenvolvimento local
 .claude/
 .opencode/

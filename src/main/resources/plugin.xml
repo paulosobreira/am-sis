@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <!-- Extension point necessario para ReportEngine$EngineExtensionManager.
+       Definido normalmente no bundle org.eclipse.birt.report.engine, que nao
+       existe como JAR separado na distribuicao Maven do BIRT. -->
+  <extension-point
+    id="org.eclipse.birt.report.engine.extension"
+    name="Engine Extension"
+    schema="schema/engine.exsd"/>
+</plugin>

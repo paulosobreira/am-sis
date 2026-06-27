@@ -4,6 +4,9 @@ import br.com.am.servlet.HibernateServlet;
 import org.apache.catalina.Context;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.startup.Tomcat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,10 +18,23 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.logging.LogManager;
 
 public class EmbeddedServer {
 
+    private static final Logger log = LoggerFactory.getLogger(EmbeddedServer.class);
+
     public static void main(String[] args) throws Exception {
+        // Redireciona java.util.logging (Tomcat/BIRT) para SLF4J → Logback → arquivo
+        LogManager.getLogManager().reset();
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
+
+        // Garante que o diretório de logs existe
+        Files.createDirectories(Paths.get("logs"));
+
+        log.info("Iniciando am-sis...");
+
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(8080);
         tomcat.getConnector(); // necessário para criar e vincular o conector HTTP
@@ -35,7 +51,8 @@ public class EmbeddedServer {
         ctx.addServletMappingDecoded("/HibernateServlet", "HibernateServlet");
 
         tomcat.start();
-        System.out.println("am-sis iniciado em http://localhost:8080/am-sis");
+        log.info("am-sis iniciado em http://localhost:8080/am-sis");
+        log.info("Logs gravados em: {}", Paths.get("logs/am-sis.log").toAbsolutePath());
         tomcat.getServer().await();
     }
 

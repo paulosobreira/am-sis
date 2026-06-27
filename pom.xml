@@ -49,24 +49,11 @@
             <version>3.14.0</version>
         </dependency>
 
-        <!-- BIRT (exclui HSQLDB vulnerável) -->
+        <!-- Thymeleaf: geração de relatórios HTML -->
         <dependency>
-            <groupId>org.eclipse.birt.runtime</groupId>
-            <artifactId>viewservlets</artifactId>
-            <version>4.5.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hsqldb</groupId>
-                    <artifactId>hsqldb</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- Override HSQLDB para versão não vulnerável (CVE #8) -->
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.7.3</version>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>3.1.2.RELEASE</version>
         </dependency>
 
         <!-- Jersey 2.x (javax.ws.rs - compatível com Tomcat 9 e BIRT) -->
@@ -96,6 +83,18 @@
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
             <version>2.40</version>
+        </dependency>
+
+        <!-- Logging: Logback (SLF4J binding) + bridge JUL→SLF4J -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>1.7.36</version>
         </dependency>
     </dependencies>
 

@@ -3,7 +3,6 @@ package br.com.am.rest;
 import br.com.am.entidades.Binario;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
-import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.hibernate.Session;
@@ -36,7 +35,7 @@ public class BinarioApp extends RestApp {
 				return Response.status(401).entity("Token inválido")
 						.type(MediaType.APPLICATION_JSON).build();
 			}
-			byte[] byteArray = IOUtils.toByteArray(uploadedInputStream);
+			byte[] byteArray = uploadedInputStream.readAllBytes();
 
 			BufferedImage original = createImageFromBytes(byteArray);
 			if (original.getWidth() * original.getHeight() > 160000) {
