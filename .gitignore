@@ -2,6 +2,7 @@
 /target/
 /build/
 target
+dependency-reduced-pom.xml
 
 # IDE
 .settings

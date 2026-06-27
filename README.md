@@ -1,46 +1,47 @@
-# am-sis 
+# am-sis
 
-Exemplo de implementação basica de um sistema para arquivo morto.
+Sistema de arquivo morto com Tomcat embutido e banco H2 persistente.
 
-Lista de tecnologias usadas:
-1. Java
-2. JS
-3. Bootstrap
-4. Hibernate
-5. REST
-6. MySql
-7. Maven
-   
-## Como testar
+## Tecnologias
 
->No repositório Dockerhub:
+- Java 11, JAX-RS (Jersey 2.x), Hibernate 6, H2, Tomcat 9 embutido
+- Bootstrap, jQuery, BIRT 4.5 (relatórios)
+- Maven (fat JAR), Docker
 
-1.[sowbreira/am-sis](https://cloud.docker.com/u/sowbreira/repository/docker/sowbreira/am-sis)
+## Build
 
-## Construção Maven e Docker
-
-- mvn clean package
-- mvn war:war
-- docker build -f am-sis.dockerfile . -t sowbreira/am-sis
-- docker push sowbreira/am-sis
-
-## Como testar no Play with Docker
-
-Pode ser executado no [Play with Docker](https://labs.play-with-docker.com/)
-
->Baixar o aqruivo do docker compose
-```
-curl -LfO 'https://raw.githubusercontent.com/paulosobreira/am-sis/master/docker-compose.yml'
+```bash
+mvn clean package
 ```
 
->Iniciar containers do Mysql,PhpMyAdmin e Am-sis
+Gera `target/am-sis.jar` com todas as dependências e Tomcat embutido.
+
+## Execução local
+
+```bash
+java -jar target/am-sis.jar
 ```
+
+A aplicação inicia em `http://localhost:8080/am-sis`. O banco H2 é criado automaticamente em `./data/am-sis.mv.db`.
+
+Login padrão: **admin** / **am-sis**
+
+## Docker
+
+```bash
+# Build da imagem
+docker build -f am-sis.dockerfile . -t sowbreira/am-sis
+
+# Iniciar
 docker compose up
 ```
 
->Url de acesso:
+A aplicação fica disponível em `http://localhost/am-sis`. Os dados do H2 são persistidos em `./data/`.
 
-link_gerado_playwithdocker/**am-sis/login.jsp**
+## Script completo
 
-Login : admin 
-Senha : am-sis
+```bash
+./build.sh
+```
+
+Executa: `docker compose down` → `mvn clean package` → `docker build` → `docker compose up`.

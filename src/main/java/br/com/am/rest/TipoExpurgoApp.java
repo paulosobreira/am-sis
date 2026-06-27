@@ -5,9 +5,8 @@ import br.com.am.entidades.Usuario;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
 import br.com.am.util.Util;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -50,13 +49,13 @@ public class TipoExpurgoApp extends RestApp {
 			usuario = validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401)
-					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
+					.entity(StringEscapeUtils.escapeHtml4("Token inválido"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		if (usuario.getVisitante()) {
 			return Response.status(403)
 					.entity(StringEscapeUtils
-							.escapeHtml("Exclusão não permitida"))
+							.escapeHtml4("Exclusão não permitida"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		Session session = HibernateUtil.getSession();
@@ -64,7 +63,7 @@ public class TipoExpurgoApp extends RestApp {
 			if (tipoExpurgo.getId() == null) {
 				return Response.status(400)
 						.entity(StringEscapeUtils
-								.escapeHtml("Tipo Expurgo inválido"))
+								.escapeHtml4("Tipo Expurgo inválido"))
 						.type(MediaType.APPLICATION_JSON).build();
 			} else {
 				remover(session,tipoExpurgo.getClass(),tipoExpurgo.getId());
@@ -85,14 +84,14 @@ public class TipoExpurgoApp extends RestApp {
 			validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401)
-					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
+					.entity(StringEscapeUtils.escapeHtml4("Token inválido"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		Session session = HibernateUtil.getSession();
 		try {
-			List<TipoExpurgo> tipoExpurgos = session
-					.createCriteria(TipoExpurgo.class)
-					.addOrder(Order.asc("descricao")).list();
+			List<TipoExpurgo> tipoExpurgos = session.createQuery(
+					"FROM TipoExpurgo ORDER BY descricao ASC", TipoExpurgo.class)
+					.getResultList();
 			return Response.status(200).entity(tipoExpurgos).build();
 		} catch (Exception e) {
 			return tratamentoErro(e);
@@ -107,13 +106,13 @@ public class TipoExpurgoApp extends RestApp {
 			validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401)
-					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
+					.entity(StringEscapeUtils.escapeHtml4("Token inválido"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		if (Util.isNullOrEmpty(tipoExpurgo.getDescricao())) {
 			return Response.status(400)
 					.entity(StringEscapeUtils
-							.escapeHtml("Descrição obrigatória."))
+							.escapeHtml4("Descrição obrigatória."))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		return null;

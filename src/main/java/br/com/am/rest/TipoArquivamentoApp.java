@@ -5,10 +5,8 @@ import br.com.am.entidades.Usuario;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
 import br.com.am.util.Util;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Order;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -56,7 +54,7 @@ public class TipoArquivamentoApp extends RestApp {
         if (usuario.getVisitante()) {
             return Response.status(403)
                     .entity(StringEscapeUtils
-                            .escapeHtml("Exclusão não permitida"))
+                            .escapeHtml4("Exclusão não permitida"))
                     .type(MediaType.APPLICATION_JSON).build();
         }
         Session session = HibernateUtil.getSession();
@@ -87,9 +85,9 @@ public class TipoArquivamentoApp extends RestApp {
         }
         Session session = HibernateUtil.getSession();
         try {
-            List<TipoArquivamento> tipoArquivamentos = session
-                    .createCriteria(TipoArquivamento.class)
-                    .addOrder(Order.asc("descricao")).list();
+            List<TipoArquivamento> tipoArquivamentos = session.createQuery(
+                    "FROM TipoArquivamento ORDER BY descricao ASC", TipoArquivamento.class)
+                    .getResultList();
             return Response.status(200).entity(tipoArquivamentos).build();
         } catch (Exception e) {
             return tratamentoErro(e);

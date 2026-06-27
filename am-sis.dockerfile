@@ -1,6 +1,6 @@
-FROM tomcat:9.0.82-jdk11
+FROM openjdk:11-jre-slim
 MAINTAINER Paulo Sobreira
-WORKDIR /usr/local/tomcat/webapps
-RUN  rm -rf *
-ADD target/am-sis.war /usr/local/tomcat/webapps/am-sis.war
+WORKDIR /app
+COPY target/am-sis.jar /app/am-sis.jar
 EXPOSE 8080
+CMD ["java", "-jar", "am-sis.jar"]

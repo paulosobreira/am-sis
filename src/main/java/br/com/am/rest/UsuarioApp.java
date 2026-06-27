@@ -5,10 +5,8 @@ import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
 import br.com.am.util.PassGenerator;
 import br.com.am.util.Util;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -56,13 +54,13 @@ public class UsuarioApp extends RestApp {
 			usuarioBase = validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401)
-					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
+					.entity(StringEscapeUtils.escapeHtml4("Token inválido"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		if (usuarioBase.getVisitante()) {
 			return Response.status(403)
 					.entity(StringEscapeUtils
-							.escapeHtml("Exclusão não permitida"))
+							.escapeHtml4("Exclusão não permitida"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		Session session = HibernateUtil.getSession();
@@ -70,11 +68,12 @@ public class UsuarioApp extends RestApp {
 			if (usuario.getId() == null) {
 				return Response.status(400)
 						.entity(StringEscapeUtils
-								.escapeHtml("Usuário inválido"))
+								.escapeHtml4("Usuário inválido"))
 						.type(MediaType.APPLICATION_JSON).build();
 			} else {
-				List<Usuario> list = session.createCriteria(Usuario.class)
-						.add(Restrictions.eq("id", usuario.getId())).list();
+				List<Usuario> list = session.createQuery(
+					"FROM Usuario WHERE id = :id", Usuario.class)
+					.setParameter("id", usuario.getId()).getResultList();
 				if (list.isEmpty()) {
 					return Response.status(400).entity("Usuário não encontrado")
 							.type(MediaType.APPLICATION_JSON).build();
@@ -99,13 +98,13 @@ public class UsuarioApp extends RestApp {
 			validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401)
-					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
+					.entity(StringEscapeUtils.escapeHtml4("Token inválido"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		Session session = HibernateUtil.getSession();
 		try {
-			List<Usuario> usuarios = session.createCriteria(Usuario.class)
-					.addOrder(Order.asc("nome")).list();
+			List<Usuario> usuarios = session.createQuery(
+					"FROM Usuario ORDER BY nome ASC", Usuario.class).getResultList();
 			return Response.status(200).entity(usuarios).build();
 		} catch (Exception e) {
 			return tratamentoErro(e);
@@ -120,17 +119,17 @@ public class UsuarioApp extends RestApp {
 			validaToken(token);
 		} catch (UsuarioNaoAchadoExection e1) {
 			return Response.status(401)
-					.entity(StringEscapeUtils.escapeHtml("Token inválido"))
+					.entity(StringEscapeUtils.escapeHtml4("Token inválido"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		if (Util.isNullOrEmpty(usuario.getNome())) {
 			return Response.status(400)
-					.entity(StringEscapeUtils.escapeHtml("Nome obrigatório."))
+					.entity(StringEscapeUtils.escapeHtml4("Nome obrigatório."))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		if (Util.isNullOrEmpty(usuario.getLogin())) {
 			return Response.status(400)
-					.entity(StringEscapeUtils.escapeHtml("Login obrigatório."))
+					.entity(StringEscapeUtils.escapeHtml4("Login obrigatório."))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		return null;

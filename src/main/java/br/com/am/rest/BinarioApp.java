@@ -7,7 +7,6 @@ import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 import javax.imageio.ImageIO;
 import javax.ws.rs.*;
@@ -92,8 +91,9 @@ public class BinarioApp extends RestApp {
 			throws IOException {
 		Session session = HibernateUtil.getSession();
 		try {
-			List<Binario> list = session.createCriteria(Binario.class)
-					.add(Restrictions.eq("id", new Long(id))).list();
+			List<Binario> list = session.createQuery(
+					"FROM Binario WHERE id = :id", Binario.class)
+					.setParameter("id", Long.parseLong(id)).getResultList();
 			if (list.isEmpty()) {
 				return Response.status(400).entity("imágem não encontrada")
 						.type(MediaType.APPLICATION_JSON).build();

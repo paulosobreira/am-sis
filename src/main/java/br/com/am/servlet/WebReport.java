@@ -19,7 +19,6 @@ import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 
 import br.com.am.entidades.Arquivamento;
 import br.com.am.util.BirtEngine;
@@ -66,8 +65,9 @@ public class WebReport extends HttpServlet {
 			HashMap datasets = new HashMap();
 			Session session = HibernateUtil.getSession();
 			try {
-				List list = session.createCriteria(Arquivamento.class)
-						.addOrder(Order.asc("descricao")).list();
+				List list = session.createQuery(
+						"FROM Arquivamento ORDER BY descricao ASC", Arquivamento.class)
+						.getResultList();
 				datasets.put("BIRT_REPORT_DATA_SET", list.iterator());
 			} catch (Exception e) {
 				e.printStackTrace();
