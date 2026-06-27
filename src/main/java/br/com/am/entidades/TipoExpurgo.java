@@ -7,7 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.io.Serializable;
 
-@Entity(name = "am_tipo_expurgo")
+@Entity
+@jakarta.persistence.Table(name = "am_tipo_expurgo")
 public class TipoExpurgo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,7 +15,8 @@ import jakarta.persistence.Transient;
 import br.com.am.util.Dia;
 import br.com.am.util.Util;
 
-@Entity(name = "am_arquivo")
+@Entity
+@jakarta.persistence.Table(name = "am_arquivo")
 public class Arquivamento implements Serializable {
 
 	@Id

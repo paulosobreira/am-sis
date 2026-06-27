@@ -32,7 +32,7 @@ public class HibernateServlet extends HttpServlet {
                 // Schema é criado automaticamente via hbm2ddl.auto=update
                 // Insere dados iniciais apenas se o banco estiver vazio
                 Long empresaCount = session.createQuery(
-                        "SELECT COUNT(e) FROM am_empresa e", Long.class).uniqueResult();
+                        "SELECT COUNT(e) FROM Empresa e", Long.class).uniqueResult();
                 if (empresaCount == 0) {
                     Transaction tx = session.beginTransaction();
                     Empresa empresa = new Empresa();

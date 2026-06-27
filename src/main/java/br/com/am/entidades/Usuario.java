@@ -12,7 +12,8 @@ import jakarta.persistence.Transient;
 
 import br.com.am.util.Dia;
 
-@Entity(name = "am_usuario")
+@Entity
+@jakarta.persistence.Table(name = "am_usuario")
 public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
