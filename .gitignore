@@ -1,5 +1,16 @@
+# Build
 /target/
 /build/
 target
+
+# IDE
 .settings
 .idea
+*.iml
+
+# Ferramentas de desenvolvimento local
+.claude/
+.opencode/
+
+# Configuração sensível
+src/main/resources/config.properties
