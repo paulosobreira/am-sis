@@ -21,6 +21,7 @@ public class EmbeddedServer {
     public static void main(String[] args) throws Exception {
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(8080);
+        tomcat.getConnector(); // necessário para criar e vincular o conector HTTP
 
         Path workDir = Files.createTempDirectory("am-sis-work");
         tomcat.setBaseDir(workDir.toString());
