@@ -258,7 +258,7 @@ public class Util {
 	 */
 	public static Integer integerOrNull(int num) {
 		if (num != 0) {
-			return new Integer(num);
+			return Integer.valueOf(num);
 		}
 
 		return null;
@@ -269,7 +269,7 @@ public class Util {
 	 */
 	public static Double doubleOrNull(double num) {
 		if (num != 0) {
-			return new Double(num);
+			return Double.valueOf(num);
 		}
 
 		return null;

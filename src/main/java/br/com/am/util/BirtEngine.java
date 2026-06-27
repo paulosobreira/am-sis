@@ -49,8 +49,7 @@ public class BirtEngine {
 			config.getAppContext().put(DataEngine.MEMORY_USAGE,
 					DataEngine.MEMORY_USAGE_CONSERVATIVE);
 			config.getAppContext().put(DataEngine.MEMORY_BUFFER_SIZE, 10);
-			config.getAppContext().put(DataEngine.MEMORY_DATA_SET_CACHE,
-					new Integer(0));
+			config.getAppContext().put(DataEngine.MEMORY_DATA_SET_CACHE, 0);
 			config.getAppContext().put(
 					EngineConstants.APPCONTEXT_CLASSLOADER_KEY,
 					BirtEngine.class.getClassLoader());
