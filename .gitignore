@@ -11,6 +11,3 @@ target
 # Ferramentas de desenvolvimento local
 .claude/
 .opencode/
-
-# Configuração sensível
-src/main/resources/config.properties
