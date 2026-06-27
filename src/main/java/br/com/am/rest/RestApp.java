@@ -3,10 +3,9 @@ package br.com.am.rest;
 import br.com.am.entidades.Usuario;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -27,7 +26,7 @@ public class RestApp {
     public Usuario validaToken(String token) throws UsuarioNaoAchadoExection {
         if (token == null) {
             throw new UsuarioNaoAchadoExection(
-                    StringEscapeUtils.escapeHtml("Token inválido"));
+                    StringEscapeUtils.escapeHtml4("Token inválido"));
         }
         if (token.equals(br.com.am.rest.LoginApp.adminToken)) {
             Usuario usuario = new Usuario();
@@ -45,16 +44,15 @@ public class RestApp {
 
         Session session = HibernateUtil.getSession();
         try {
-            List<Usuario> list = session.createCriteria(Usuario.class)
-                    .add(Restrictions.eq("token", token))
-                    .add(Restrictions.eq("ativo", true)).list();
+            List<Usuario> list = session.createQuery(
+                    "FROM Usuario WHERE token = :token AND ativo = true", Usuario.class)
+                    .setParameter("token", token)
+                    .getResultList();
             if (list.isEmpty()) {
                 throw new UsuarioNaoAchadoExection(
-                        StringEscapeUtils.escapeHtml("Token inválido"));
-
+                        StringEscapeUtils.escapeHtml4("Token inválido"));
             }
-            Usuario usuario = list.get(0);
-            return usuario;
+            return list.get(0);
         } finally {
             session.close();
         }
@@ -68,13 +66,16 @@ public class RestApp {
 
     public void atualizar(Session session, Object object) {
         Transaction transaction = session.beginTransaction();
-        session.update(object);
+        session.merge(object);
         transaction.commit();
     }
 
     public void remover(Session session, Class c, Long id) {
         Transaction transaction = session.beginTransaction();
-        session.delete(session.find(c, id));
+        Object entity = session.get(c, id);
+        if (entity != null) {
+            session.remove(entity);
+        }
         transaction.commit();
     }
 }

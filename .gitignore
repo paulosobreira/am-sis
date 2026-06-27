@@ -2,11 +2,21 @@
 /target/
 /build/
 target
+dependency-reduced-pom.xml
 
 # IDE
 .settings
 .idea
 *.iml
+
+# Logs
+logs/
+
+# Banco H2 local
+data/
+
+# Tomcat work dir gerado em runtime
+tomcat.*/
 
 # Ferramentas de desenvolvimento local
 .claude/

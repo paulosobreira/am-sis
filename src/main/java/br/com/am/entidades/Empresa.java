@@ -1,9 +1,10 @@
 package br.com.am.entidades;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
-@Entity(name = "am_empresa")
+@Entity
+@Table(name = "am_empresa")
 public class Empresa implements Serializable {
 
 	@Id

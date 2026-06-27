@@ -239,22 +239,6 @@ public class FormatNumber extends Object {
 	}
 
 	/**
-	 * Method for formating a double number in Currency ($ #,##0.00) format.
-	 */
-	public static String currency(double NUMBER) {
-		String number = format(NUMBER, "#,##0.00");
-		return "$ " + number;
-	}
-
-	/**
-	 * Method for formating a double number in Percent (##0.00000) format.
-	 */
-	public static String percent(double NUMBER) {
-		String number = format(NUMBER, "##0.00000");
-		return number;
-	}
-
-	/**
 	 * Method for parse an int number.<br>
 	 * parameter: String
 	 */
@@ -267,7 +251,7 @@ public class FormatNumber extends Object {
 				NUMBER = NUMBER.substring(0, NUMBER.indexOf("."));
 			}
 			try {
-				resultado = (new Integer(NUMBER)).intValue();
+				resultado = Integer.parseInt(NUMBER);
 			} catch (Exception e) {
 				resultado = 0;
 			}
@@ -288,7 +272,7 @@ public class FormatNumber extends Object {
 				NUMBER = NUMBER.substring(0, NUMBER.indexOf("."));
 			}
 			try {
-				resultado = new Integer(NUMBER);
+				resultado = Integer.valueOf(NUMBER);
 			} catch (Exception e) {
 				resultado = null;
 			}
@@ -309,7 +293,7 @@ public class FormatNumber extends Object {
 				NUMBER = NUMBER.substring(0, NUMBER.indexOf("."));
 			}
 			try {
-				resultado = (new Long(NUMBER)).longValue();
+				resultado = Long.parseLong(NUMBER);
 			} catch (Exception e) {
 				resultado = 0;
 			}
@@ -330,7 +314,7 @@ public class FormatNumber extends Object {
 				NUMBER = NUMBER.substring(0, NUMBER.indexOf("."));
 			}
 			try {
-				resultado = new Long(NUMBER);
+				resultado = Long.valueOf(NUMBER);
 			} catch (Exception e) {
 				resultado = null;
 			}
@@ -357,19 +341,6 @@ public class FormatNumber extends Object {
 	}
 
 	/**
-	 * Method for parse an int number.<br>
-	 * parameter: double
-	 */
-	public static int parseInt(double NUMBER) {
-		try {
-			Double D = new Double(NUMBER);
-			return D.intValue();
-		} catch (Exception e) {
-			return 0;
-		}
-	}
-
-	/**
 	 * Method for parse a double number.<br>
 	 * parameter: String
 	 */
@@ -379,7 +350,7 @@ public class FormatNumber extends Object {
 			NUMBER = NUMBER.trim();
 			NUMBER = checkDouble(NUMBER);
 			try {
-				resultado = (new Double(NUMBER)).doubleValue();
+				resultado = Double.parseDouble(NUMBER);
 			} catch (Exception e) {
 				resultado = 0;
 			}
@@ -397,7 +368,7 @@ public class FormatNumber extends Object {
 			NUMBER = NUMBER.trim();
 			NUMBER = checkDouble(NUMBER);
 			try {
-				resultado = new Double(NUMBER);
+				resultado = Double.valueOf(NUMBER);
 			} catch (Exception e) {
 				resultado = null;
 			}
@@ -405,66 +376,12 @@ public class FormatNumber extends Object {
 		return resultado;
 	}
 
-	public static String fillMode(String valor, String fill) {
-		if (valor.length() < fill.length()) {
-			return fill.substring(0, fill.length() - valor.length())
-					+ valor.trim();
-		}
-		return valor;
-	}
-
-	public static String fillMode(double valor, String fill) {
-		String texto = "" + (int) valor;
-		return (fillMode(texto, fill));
-	}
-
-	public static String fillMode(java.lang.Integer valor, String fill) {
-		String texto = "" + (Integer) valor;
-		return (fillMode(texto, fill));
-	}
-
-	/*
-	 * Only PDF
-	 */
-	public static String fillMode(int TEXT, int LENGTH, String CODE) {
-		return fillMode(TEXT + "", LENGTH, CODE);
-	}
-
-	public static String fillMode(double TEXT, int LENGTH, String CODE) {
-		return fillMode(TEXT + "", LENGTH, CODE);
-	}
-
-	public static String fillMode(String TEXT, int LENGTH, String CODE) {
-		String code = TEXT;
-		if (code != null && code.length() > 0) {
-			if (code.length() > LENGTH) {
-				code = code.substring(0, LENGTH);
-			} else if (code.length() < LENGTH) {
-				int c = LENGTH - code.length();
-				for (int i = 0; i < c; i++) {
-					code += CODE;
-				}
-			}
-		}
-		return code;
-	}
-
 	public static Integer toInteger(String NUMBER) {
 		Integer resultado = null;
 		if (NUMBER != null && NUMBER.length() > 0) {
 			NUMBER = NUMBER.trim();
 			NUMBER = checkInt(NUMBER);
-			resultado = new Integer(NUMBER);
-		}
-		return resultado;
-	}
-
-	public static Integer toInt(String NUMBER) {
-		Integer resultado = null;
-		if (NUMBER != null && NUMBER.length() > 0) {
-			NUMBER = NUMBER.trim();
-			NUMBER = checkInt(NUMBER);
-			resultado = new Integer(NUMBER);
+			resultado = Integer.valueOf(NUMBER);
 		}
 		return resultado;
 	}
@@ -474,7 +391,7 @@ public class FormatNumber extends Object {
 		if (NUMBER != null && NUMBER.length() > 0) {
 			NUMBER = NUMBER.trim();
 			NUMBER = checkDouble(NUMBER);
-			resultado = new Double(NUMBER);
+			resultado = Double.valueOf(NUMBER);
 		}
 		return resultado;
 	}
@@ -484,7 +401,7 @@ public class FormatNumber extends Object {
 		if (NUMBER != null && NUMBER.length() > 0) {
 			NUMBER = NUMBER.trim();
 			NUMBER = checkInt(NUMBER);
-			resultado = new Long(NUMBER);
+			resultado = Long.valueOf(NUMBER);
 		}
 		return resultado;
 	}

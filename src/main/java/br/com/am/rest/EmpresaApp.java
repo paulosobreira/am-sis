@@ -5,9 +5,8 @@ import br.com.am.entidades.Usuario;
 import br.com.am.erros.UsuarioNaoAchadoExection;
 import br.com.am.util.HibernateUtil;
 import br.com.am.util.Util;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -54,7 +53,7 @@ public class EmpresaApp extends RestApp {
 		}
 		if(usuario.getVisitante()){
 			return Response.status(403)
-					.entity(StringEscapeUtils.escapeHtml("Exclusão não permitida"))
+					.entity(StringEscapeUtils.escapeHtml4("Exclusão não permitida"))
 					.type(MediaType.APPLICATION_JSON).build();
 		}
 		Session session = HibernateUtil.getSession();
@@ -86,8 +85,8 @@ public class EmpresaApp extends RestApp {
 		}
 		Session session = HibernateUtil.getSession();
 		try {
-			List<Empresa> empresas = session.createCriteria(Empresa.class)
-					.addOrder(Order.asc("nome")).list();
+			List<Empresa> empresas = session.createQuery(
+					"FROM Empresa ORDER BY nome ASC", Empresa.class).getResultList();
 			return Response.status(200).entity(empresas).build();
 		} catch (Exception e) {
 			return tratamentoErro(e);
