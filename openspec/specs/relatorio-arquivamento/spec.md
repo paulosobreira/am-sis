@@ -48,3 +48,18 @@ O sistema SHALL incluir a imagem de logo da empresa vinculada ao arquivamento no
 #### Scenario: Relatório sem logo
 - **WHEN** o arquivamento não possui empresa ou a empresa não tem `idArquivo`
 - **THEN** o relatório exibe o espaço reservado sem imagem, sem erro
+
+### Requirement: Sem dependências do BIRT
+O sistema NÃO DEVE depender de nenhuma classe ou artefato do BIRD para funcionar. Todo código BIRT deve ser removido.
+
+#### Scenario: BIRT classes removed
+- **WHEN** o projeto compila
+- **THEN** `BirtEngine.java`, `BirtDataSet.java`, `WebReport.java` não devem existir
+
+#### Scenario: BIRT resources removed
+- **WHEN** o projeto compila
+- **THEN** `arquivamento.rptdesign` e `plugin.xml` não devem existir
+
+#### Scenario: BIRT config removed
+- **WHEN** o `config.properties` é carregado
+- **THEN** não deve conter propriedades `birtLog` ou `birtLogDir`

@@ -8,9 +8,9 @@ import br.com.am.util.Util;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Session;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import java.util.List;
 @Path("/empresa")
 public class EmpresaApp extends RestApp {

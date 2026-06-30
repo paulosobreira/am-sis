@@ -11,28 +11,28 @@
     <version>build</version>
 
     <dependencies>
-        <!-- Tomcat embutido (javax.servlet - compatível com BIRT 4.5) -->
+        <!-- Tomcat 11 embutido (jakarta.servlet) -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.91</version>
+            <version>11.0.22</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
-            <version>9.0.91</version>
+            <version>11.0.22</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-el</artifactId>
-            <version>9.0.91</version>
+            <version>11.0.22</version>
         </dependency>
 
-        <!-- Hibernate 6 (jakarta.persistence) -->
+        <!-- Hibernate 7 (jakarta.persistence) -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.6.1.Final</version>
+            <version>7.0.2.Final</version>
         </dependency>
 
         <!-- H2 banco embutido -->
@@ -56,45 +56,45 @@
             <version>3.1.2.RELEASE</version>
         </dependency>
 
-        <!-- Jersey 2.x (javax.ws.rs - compatível com Tomcat 9 e BIRT) -->
+        <!-- Jersey 4.x (jakarta.ws.rs) -->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
-            <version>2.40</version>
+            <version>4.0.0-M2</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-multipart</artifactId>
-            <version>2.40</version>
+            <version>4.0.0-M2</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
-            <version>2.40</version>
+            <version>4.0.0-M2</version>
         </dependency>
 
-        <!-- JAXB API (removido no JDK 11) — exigido por jackson-module-jaxb-annotations -->
+        <!-- Jakarta XML Binding (ex-JAXB) — necessário para Jackson no JDK 21 -->
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
-            <version>2.40</version>
+            <version>4.0.0-M2</version>
         </dependency>
 
         <!-- Logging: Logback (SLF4J binding) + bridge JUL→SLF4J -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.13</version>
+            <version>1.5.16</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jul-to-slf4j</artifactId>
-            <version>1.7.36</version>
+            <version>2.0.16</version>
         </dependency>
     </dependencies>
 
@@ -192,7 +192,8 @@
     </build>
 
     <properties>
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
     </properties>
 </project>

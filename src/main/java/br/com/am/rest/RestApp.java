@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 public class RestApp {
