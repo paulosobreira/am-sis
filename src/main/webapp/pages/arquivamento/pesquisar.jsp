@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/am-sis.css?v=<%=Recursos.getProperties().getProperty("versao")%>">
+<link rel="stylesheet" href="../../css/dark-mode.css?v=<%=Recursos.getProperties().getProperty("versao")%>">
 <link rel="stylesheet"
 	href="../../bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../../css/mdb-btns.css">
@@ -18,6 +19,9 @@
 <body>
 	<section id="head" class="container">
 		<ul class="nav nav-pills" style="float: right; margin-top: 10px">
+			<li role="presentation">
+				<button id="darkModeToggle" onclick="toggleDarkMode()" title="Alternar dark mode">&#9790;</button>
+			</li>
 			<li role="presentation"><a href="../../index.jsp"> <span
 					class="glyphicon glyphicon-home" aria-hidden="true"></span> Menu
 			</a></li>

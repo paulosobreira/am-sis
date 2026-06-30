@@ -91,6 +91,45 @@ public class UsuarioApp extends RestApp {
 		return Response.status(200).entity(usuario).build();
 	}
 
+	@POST
+	@Path("/darkmode")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response salvarDarkMode(@HeaderParam("token") String token,
+			Usuario payload) {
+		Usuario usuarioAutenticado;
+		try {
+			usuarioAutenticado = validaToken(token);
+		} catch (UsuarioNaoAchadoExection e) {
+			return Response.status(401)
+					.entity(StringEscapeUtils.escapeHtml4("Token inválido"))
+					.type(MediaType.APPLICATION_JSON).build();
+		}
+		if (usuarioAutenticado.getVisitante()) {
+			return Response.status(403)
+					.entity(StringEscapeUtils.escapeHtml4("Operação não permitida"))
+					.type(MediaType.APPLICATION_JSON).build();
+		}
+		Session session = HibernateUtil.getSession();
+		try {
+			List<Usuario> list = session.createQuery(
+					"FROM Usuario WHERE id = :id", Usuario.class)
+					.setParameter("id", usuarioAutenticado.getId()).getResultList();
+			if (list.isEmpty()) {
+				return Response.status(400)
+						.entity("Usuário não encontrado")
+						.type(MediaType.APPLICATION_JSON).build();
+			}
+			Usuario usuario = list.get(0);
+			usuario.setDarkMode(payload.getDarkMode());
+			atualizar(session, usuario);
+			return Response.status(200).entity(usuario).build();
+		} catch (Exception e) {
+			return tratamentoErro(e);
+		} finally {
+			session.close();
+		}
+	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listarUsuarios(@HeaderParam("token") String token) {

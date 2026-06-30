@@ -1,0 +1,272 @@
+/*
+ * Dark mode — paleta grafite
+ * Base: #1e1e1e  Surface: #2a2a2a  Border: #3d3d3d  Text: #d4d4d4
+ */
+
+body.dark {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+}
+
+body.dark a {
+    color: #b0b0b0;
+}
+
+body.dark a:hover {
+    color: #e0e0e0;
+}
+
+/* Cabeçalho */
+body.dark .text-muted {
+    color: #909090 !important;
+}
+
+/* Well */
+body.dark .well {
+    background-color: #2a2a2a !important;
+    background-image: none !important;
+    border-color: #3d3d3d !important;
+    color: #d4d4d4 !important;
+}
+
+/* List group */
+body.dark .list-group-item {
+    background-color: #2a2a2a;
+    border-color: #3d3d3d;
+    color: #d4d4d4;
+}
+
+body.dark .list-group-item:hover {
+    background-color: #333333;
+}
+
+/* Nav pills */
+body.dark .nav-pills > li > a {
+    color: #b0b0b0;
+}
+
+body.dark .nav-pills > li.active > a,
+body.dark .nav-pills > li.active > a:focus,
+body.dark .nav-pills > li.active > a:hover {
+    background-color: #3d3d3d;
+    color: #e8e8e8;
+}
+
+/* Botões — anula gradiente do bootstrap-theme antes de aplicar cor */
+body.dark .btn {
+    background-image: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+body.dark .btn-default {
+    background-color: #3a3a3a !important;
+    border-color: #505050 !important;
+    color: #d4d4d4 !important;
+}
+
+body.dark .btn-default:hover,
+body.dark .btn-default:focus,
+body.dark .btn-default:active,
+body.dark .btn-default.active,
+body.dark .open > .dropdown-toggle.btn-default {
+    background-color: #4a4a4a !important;
+    border-color: #606060 !important;
+    color: #ffffff !important;
+}
+
+body.dark .btn-primary {
+    background-color: #3a3a3a !important;
+    border-color: #606060 !important;
+    color: #d4d4d4 !important;
+}
+
+body.dark .btn-primary:hover,
+body.dark .btn-primary:focus,
+body.dark .btn-primary:active {
+    background-color: #4a4a4a !important;
+    border-color: #707070 !important;
+    color: #ffffff !important;
+}
+
+body.dark .btn-warning,
+body.dark .dropdown-toggle.btn-warning {
+    background-color: #4a3800 !important;
+    border-color: #6b5200 !important;
+    color: #d4a800 !important;
+}
+
+body.dark .btn-warning:hover,
+body.dark .btn-warning:focus,
+body.dark .btn-warning:active {
+    background-color: #5c4600 !important;
+    border-color: #7d6100 !important;
+    color: #f0c000 !important;
+}
+
+body.dark .btn-danger {
+    background-color: #3d1f1f !important;
+    border-color: #5a2e2e !important;
+    color: #cc8080 !important;
+}
+
+body.dark .btn-danger:hover,
+body.dark .btn-danger:focus,
+body.dark .btn-danger:active {
+    background-color: #4d2828 !important;
+    border-color: #703838 !important;
+    color: #e09090 !important;
+}
+
+body.dark .btn-success {
+    background-color: #1f3d28 !important;
+    border-color: #2e5a3a !important;
+    color: #80c890 !important;
+}
+
+body.dark .btn-success:hover,
+body.dark .btn-success:focus,
+body.dark .btn-success:active {
+    background-color: #284d33 !important;
+    border-color: #3a7048 !important;
+    color: #a0e0b0 !important;
+}
+
+body.dark .btn[disabled],
+body.dark .btn.disabled {
+    background-color: #252525 !important;
+    border-color: #383838 !important;
+    color: #585858 !important;
+    opacity: 0.65;
+}
+
+/* Formulários */
+body.dark .form-control {
+    background-color: #252525;
+    border-color: #3d3d3d;
+    color: #d4d4d4;
+}
+
+body.dark .form-control:focus {
+    background-color: #2e2e2e;
+    border-color: #606060;
+    color: #e8e8e8;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.4), 0 0 5px rgba(120,120,120,.3);
+}
+
+body.dark .form-control::placeholder {
+    color: #606060;
+}
+
+body.dark select.form-control option {
+    background-color: #252525;
+    color: #d4d4d4;
+}
+
+/* Labels */
+body.dark label {
+    color: #a8a8a8;
+}
+
+/* Tabelas */
+body.dark table {
+    color: #d4d4d4;
+}
+
+body.dark .table > thead > tr > th,
+body.dark .table > tbody > tr > td,
+body.dark .table > tfoot > tr > td {
+    border-color: #3d3d3d;
+}
+
+body.dark .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #262626;
+}
+
+body.dark .table-hover > tbody > tr:hover {
+    background-color: #303030;
+}
+
+body.dark .table > thead > tr > th {
+    background-color: #252525;
+    color: #909090;
+}
+
+/* Panels */
+body.dark .panel {
+    background-color: #2a2a2a;
+    border-color: #3d3d3d;
+}
+
+body.dark .panel-default > .panel-heading {
+    background-color: #252525;
+    background-image: none !important;
+    border-color: #3d3d3d;
+    color: #a8a8a8;
+}
+
+body.dark .panel-body {
+    color: #d4d4d4;
+}
+
+/* Dropdowns */
+body.dark .dropdown-menu {
+    background-color: #2a2a2a;
+    border-color: #3d3d3d;
+}
+
+body.dark .dropdown-menu > li > a {
+    color: #d4d4d4;
+}
+
+body.dark .dropdown-menu > li > a:hover,
+body.dark .dropdown-menu > li > a:focus {
+    background-color: #383838;
+    color: #ffffff;
+}
+
+/* Checkbox e radio */
+body.dark .checkbox label,
+body.dark .radio label {
+    color: #a8a8a8;
+}
+
+/* Alerts */
+body.dark .alert-danger {
+    background-color: #3d2020;
+    border-color: #5a3030;
+    color: #e09090;
+}
+
+body.dark .alert-info {
+    background-color: #222e33;
+    border-color: #344a52;
+    color: #90b8c8;
+}
+
+/* Footer */
+body.dark .footer {
+    background-color: #191919;
+    border-top: 1px solid #3d3d3d;
+}
+
+body.dark .footer .text-muted {
+    color: #606060 !important;
+}
+
+/* Toggle button */
+#darkModeToggle {
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    line-height: 1;
+    vertical-align: middle;
+    color: inherit;
+}
+
+#darkModeToggle:hover {
+    background-color: rgba(128, 128, 128, 0.15);
+}

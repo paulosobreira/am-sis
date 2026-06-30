@@ -30,8 +30,15 @@
 					id="login" placeholder="Login" required="required">
 			</div>
 			<div class="form-group">
-				<label>Senha</label> <input type="password" class="form-control"
-					id="senha" placeholder="Login" required="required">
+				<label>Senha</label>
+				<div class="input-group">
+					<input type="password" class="form-control" id="senha" placeholder="Senha" required="required">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" id="toggleSenha" tabindex="-1">
+							<span class="glyphicon glyphicon-eye-open" id="iconeSenha"></span>
+						</button>
+					</span>
+				</div>
 			</div>			
 			<button id="logar" type="button" class="btn btn-default">
 				<span class="glyphicon glyphicon glyphicon-log-in" aria-hidden="true"></span>

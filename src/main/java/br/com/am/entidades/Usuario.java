@@ -38,6 +38,9 @@ public class Usuario implements Serializable {
 
 	private Date acesso;
 
+	@Column(name = "dark_mode")
+	private Boolean darkMode;
+
 	@Transient
 	private String acessoStr;
 
@@ -131,6 +134,14 @@ public class Usuario implements Serializable {
 
 	public void setVisitante(Boolean visitante) {
 		this.visitante = visitante;
+	}
+
+	public Boolean getDarkMode() {
+		return darkMode;
+	}
+
+	public void setDarkMode(Boolean darkMode) {
+		this.darkMode = darkMode;
 	}
 
 }
