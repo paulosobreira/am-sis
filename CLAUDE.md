@@ -23,14 +23,14 @@ O Maven incrementa automaticamente o campo `versao` em `config.properties` a cad
 
 ## Arquitetura
 
-Aplicação Java EE empacotada como WAR, rodando em **Tomcat 9 + JDK 11**. Não usa Spring — depende diretamente de **JAX-RS (Jersey 2.27)** para a API REST e **Hibernate 5.6** via JPA para persistência.
+Aplicação Java empacotada como fat JAR, rodando em **Tomcat 11 + JDK 21**. Não usa Spring — depende diretamente de **JAX-RS (Jersey 4.x)** para a API REST e **Hibernate 7** via JPA para persistência.
 
 ```
 br.com.am
 ├── entidades/      JPA entities (tabelas am_*)
 ├── rest/           Recursos JAX-RS — um arquivo por endpoint
 │   └── RestApp     Classe base: validaToken(), incluir(), atualizar(), remover()
-├── servlet/        HibernateServlet (inicialização), WebReport (BIRT)
+├── servlet/        HibernateServlet (inicialização)
 ├── recursos/       Recursos.java — carrega config.properties em singleton
 └── util/           HibernateUtil (SessionFactory singleton), utilitários de data/número
 ```
@@ -61,10 +61,6 @@ br.com.am
 | `admin` | Login do usuário administrador |
 | `pass` | Senha do admin em MD5 |
 | `versao` | Incrementado automaticamente pelo Maven a cada build |
-| `birtLogDir` | Diretório de log do BIRT |
+| `versao` | Incrementado automaticamente pelo Maven a cada build |
 
 Para gerar hash MD5 de uma senha: execute `main()` em `Recursos.java` chamando `Util.md5("senha")`.
-
-## Relatórios (BIRT)
-
-O template fica em `src/main/resources/arquivamento.rptdesign`. O motor BIRT é inicializado via `BirtEngine` (singleton por `ServletContext`). Relatórios gerados via `POST /rest/relatorioArquivamento/gerar` ficam em cache em memória por 60 segundos, identificados por timestamp.

@@ -5,12 +5,12 @@ Sistema de gestão de arquivo morto: cadastro, pesquisa e geração de relatóri
 ## Tecnologias
 
 | Camada | Tecnologia |
-|---|---|
-| Backend | Java 11, JAX-RS (Jersey 2.x), Hibernate 6 |
+|---|---|---|
+| Backend | Java 21, JAX-RS (Jersey 4.x), Hibernate 7 |
 | Banco | H2 (fat JAR) / MySQL 8 (Docker) |
 | Relatórios | Thymeleaf (HTML, imprimível via browser) |
 | Frontend | JSP, Bootstrap 3, jQuery |
-| Servidor | Tomcat 9 embutido |
+| Servidor | Tomcat 11 embutido |
 | Build/Deploy | Maven (fat JAR), Docker |
 
 ---
@@ -188,4 +188,3 @@ Gera relatório HTML imprimível com logo da empresa, código, descrição, obse
 | `admin` | Login do administrador |
 | `pass` | Senha do admin em MD5 (gere com `Util.md5("senha")` em `Recursos.java`) |
 | `versao` | Incrementado automaticamente pelo Maven a cada build |
-| `birtLogDir` | Diretório de log interno (padrão: `logs`) |

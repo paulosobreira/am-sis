@@ -25,7 +25,7 @@ public class EmbeddedServer {
     private static final Logger log = LoggerFactory.getLogger(EmbeddedServer.class);
 
     public static void main(String[] args) throws Exception {
-        // Redireciona java.util.logging (Tomcat/BIRT) para SLF4J → Logback → arquivo
+        // Redireciona java.util.logging (Tomcat) para SLF4J → Logback → arquivo
         LogManager.getLogManager().reset();
         SLF4JBridgeHandler.removeHandlersForRootLogger();
         SLF4JBridgeHandler.install();

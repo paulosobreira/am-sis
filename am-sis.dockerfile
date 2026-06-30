@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:21-jre
 MAINTAINER Paulo Sobreira
 WORKDIR /app
 COPY target/am-sis.jar /app/am-sis.jar

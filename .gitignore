@@ -21,3 +21,4 @@ tomcat.*/
 # Ferramentas de desenvolvimento local
 .claude/
 .opencode/
+.vscode

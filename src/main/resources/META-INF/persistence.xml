@@ -5,6 +5,12 @@
              version="3.0">
 
     <persistence-unit name="am-sis-jpa" transaction-type="RESOURCE_LOCAL">
+        <class>br.com.am.entidades.Arquivamento</class>
+        <class>br.com.am.entidades.Binario</class>
+        <class>br.com.am.entidades.Empresa</class>
+        <class>br.com.am.entidades.TipoArquivamento</class>
+        <class>br.com.am.entidades.TipoExpurgo</class>
+        <class>br.com.am.entidades.Usuario</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:h2:file:./data/am-sis;AUTO_SERVER=TRUE"/>

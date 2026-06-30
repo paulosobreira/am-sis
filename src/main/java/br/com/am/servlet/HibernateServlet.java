@@ -8,10 +8,10 @@ import br.com.am.util.Util;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
@@ -69,12 +69,6 @@ public class HibernateServlet extends HttpServlet {
             }
         } catch (NoSuchAlgorithmException e) {
             printWriter.println(e.getMessage());
-        }
-
-        String tipo = request.getParameter("tipo");
-        if ("create_schema".equals(tipo)) {
-            // Schema gerenciado automaticamente por hbm2ddl.auto=update
-            printWriter.println("<p>Schema gerenciado automaticamente (hbm2ddl.auto=update)</p>");
         }
 
         printWriter.println("<br/><a href='conf.jsp'>Voltar</a>");

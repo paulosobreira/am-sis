@@ -34,14 +34,7 @@ A:hover {
 	color: black;
 }
 </style>
-<script>
-	function criar(){
-		window.location = "HibernateServlet?tipo=create_schema&senha=" + document.getElementById('senha').value;
-	}
-	function atualizar(){
-		window.location = "HibernateServlet?tipo=update_schema&senha=" + document.getElementById('senha').value;
-	}
-</script>
+
 <title>Am-Sis</title>
 </head>
 <body>
@@ -166,13 +159,6 @@ A:hover {
 				</td>
 			</tr>
 			<tr>
-				<td class="c1"><a href="#" onclick="criar();">
-						Criar Schema </a></td>
-				<td class="c2"><a href="#" onclick="atualizar()">
-						Atualizar Schema </a></td>
-			</tr>
-			<tr>
-				<td class="c2"><input type="password" id="senha"></td>
 				<td class="c2"><a href="index.jsp"> Menu </a></td>
 			</tr>
 		</tbody>
