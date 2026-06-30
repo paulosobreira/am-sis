@@ -5,7 +5,7 @@ Sistema de gestão de arquivo morto: cadastro, pesquisa e geração de relatóri
 ## Tecnologias
 
 | Camada | Tecnologia |
-|---|---|---|
+|---|---|
 | Backend | Java 21, JAX-RS (Jersey 4.x), Hibernate 7 |
 | Banco | H2 (fat JAR) / MySQL 8 (Docker) |
 | Relatórios | Thymeleaf (HTML, imprimível via browser) |
