@@ -10,12 +10,16 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/mdb-btns.css">
 <link rel="stylesheet" href="css/am-sis.css?v=<%=Recursos.getProperties().getProperty("versao")%>">
+<link rel="stylesheet" href="css/dark-mode.css?v=<%=Recursos.getProperties().getProperty("versao")%>">
 <script src="jquery/jquery-3.1.1.min.js"></script>
 <title>Am-Sis</title>
 </head>
 <body>
 	<section class="container">
 		<ul class="nav nav-pills" style="float: right; margin-top: 10px">
+			<li role="presentation">
+				<button id="darkModeToggle" onclick="toggleDarkMode()" title="Alternar dark mode">&#9790;</button>
+			</li>
 			<li id="sair" role="presentation"><a href="#"> <span
 					class="glyphicon glyphicon-off" aria-hidden="true"></span> Sair
 			</a></li>

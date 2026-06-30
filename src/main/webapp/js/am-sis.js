@@ -4,6 +4,10 @@ if ((localStorage.getItem("token") == null && window.location.href
 	window.location.href = "/am-sis/login.jsp";
 }
 
+if (localStorage.getItem("darkMode") === "true") {
+	document.body.classList.add("dark");
+}
+
 btnMobile();
 
 $('#sair').bind("click", function() {
@@ -110,6 +114,27 @@ jQuery(window).on('error', function(e) {
 	jQuery.active = 0;
 	// Do something to handle the error
 });
+
+function toggleDarkMode() {
+	var isDark = document.body.classList.contains("dark");
+	var newValue = !isDark;
+	document.body.classList.toggle("dark", newValue);
+	$.ajax({
+		type: "POST",
+		url: "/am-sis/rest/usuario/darkmode",
+		headers: { "token": localStorage.getItem("token") },
+		data: JSON.stringify({ darkMode: newValue }),
+		contentType: "application/json",
+		dataType: "json",
+		success: function() {
+			localStorage.setItem("darkMode", newValue ? "true" : "false");
+		},
+		error: function(xhRequest) {
+			document.body.classList.toggle("dark", isDark);
+			tratamentoErro(xhRequest);
+		}
+	});
+}
 
 (function($) {
 	$(".ripple-effect").click(function(e) {
